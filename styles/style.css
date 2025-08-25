@@ -1,0 +1,217 @@
+/* Cores
+
+#F2F2F2 - branco
+#F26430 - laranja
+#F2522E - laranja escuro
+#F20505 - vermelho
+#730202 - vinho
+
+
+font-family: 'Montserrat', sans-serif;
+font-stretch: condensed;
+font-family: Arial;
+font-family: "Candal", sans-serif;
+font-family: "Roboto Condensed", sans-serif;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Candal&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+*/
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Condensed", sans-serif;
+    
+}
+
+:root{
+    --lead: #212121;
+    --gold-finger: #F2BD12;
+    --eye-ball: #FFFdF7;
+    --hint-yellow: #FCF1CC;
+    --pure-white:#FFF;
+
+}
+body{
+    background: var(--eye-ball);
+}
+
+/* ---------------  Estilo Basico  --------------------------------------*/
+a{
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: var(--lead);
+    
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/*poe as seçoes na horizontal*/
+li{
+    list-style: none;
+}
+
+.between{
+    justify-content: space-between;
+}
+
+/*espaçamento entre as seções*/
+.gap-2{
+    gap: 2rem;
+}
+
+.gap-3{
+    gap: 3rem;
+}
+
+.wrapper{
+    max-width: 1800px;
+    margin: auto;
+    padding-inline: 1rem;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+    display: block;
+}
+
+/*-------------------    Estilo do cabeçalho    -------------------------------*/
+/*
+header {
+    max-width: 100%;
+    height: 90vh;  
+    background-color: #F2F2F2;
+    padding: 20px;
+    text-align: center;
+    
+}*/
+.navbar{
+    min-height: 14vh;
+
+}
+
+.logo{
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--gold-finger);
+}
+
+/*botão de cadastrar*/
+.btn{
+    display: inline-block;
+    padding: .9rem 2rem;
+    background: var(--gold-finger);
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    color: var(--pure-white);
+    box-shadow: rgba(0,0,0,0.1) 0 2px 1px;
+    transition: .3s ease-in-out;
+
+}
+/*interação no botão de cadastrar*/
+.btn:hover{
+    background: var(--lead);
+    /*transform: translateY(-2px);*/
+    
+}
+
+.desktop-action .menu{
+    font-size: 1.5rem;
+    display: none;
+} 
+
+.mobile-menu{
+    display: none;
+}
+
+/*------------------    Estilo das Seções    --------------------------------------------*/
+.hero-section{ 
+    height: 600px;
+    background-image: url('../imagens/headerHome2.JPG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    position: relative;
+    
+}
+
+.conteiner{
+    flex: 1;
+    flex-basis: 300px;
+}
+
+h1{
+    font-size: 5.6vw;
+    color: var(--eye-ball);
+}
+
+h1 span{
+    color: var(--gold-finger);
+}
+
+p{
+    font-size: 1.25rem;
+    color: rgb(187, 184, 184);
+    line-height: 1.8rem;
+    font-weight: 400;
+}
+
+.para{
+    margin-block: 2rem;
+    max-width: 550px;
+}
+
+
+
+/*------------------   Estilo do Rodapé    --------------------------------------------*/
+
+/*------------------   Queries Midia   --------------------------------------------*/
+@media screen and (max-width: 780px){
+    .navlist, 
+    .desktop-action .btn{ 
+        display: none;
+    }
+    
+    .desktop-action .menu{
+        display: block;
+    
+    }
+    .mobile-menu{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        position: absolute;
+        top: 20%;
+        left: -100%;
+        transform: translateX(-50%);
+        width: 20rem;
+        padding: 2rem;
+        background: var(--pure-white);
+        border: .1rem solid var(--gold-finger);
+        border-radius: 2rem;
+        box-shadow: 
+        rgba(0,0,0,0.05) 8xp 8xp 8xp,
+        rgba(0,0,0,0.05) 8xp 8xp 8xp inset;
+        transition: all .5s ease-in-out;
+    }
+ 
+    .mobile-menu-active{
+        left: 50%;
+        transform: translateX(-50%);
+        
+    }
+}
