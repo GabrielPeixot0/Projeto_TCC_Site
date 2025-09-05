@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
         integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+    <script defer src="/scripts/main.js"> </script>
 </head>
 
 <body>
@@ -27,7 +29,7 @@
                     <a href="#">Home</a>
                 </li>
                 <li>
-                    <a href="#">Sobre nós</a>
+                    <a href="#">Sobre</a>
                 </li>
                 <li>
                     <a href="#">Layouts</a>
@@ -69,7 +71,7 @@
     <!-- Parte do Conteudo -->
     <main>
         <section>
-            <div class="hero-section flex wrapper gap-4">
+            <div class="hero-section flex wrapper gap-2">
                 <div class="content ">
                     <h1> Faça o melhor cadárpio<br> para seu
                         <span>Négocio</span>
@@ -90,6 +92,7 @@
 
         </section>
 
+        <!-- SEÇÃO 01 -->
         <section>
             <div class="wrapper p-top">
                 <div class="text-center">
@@ -100,37 +103,186 @@
                 <div class="flex text-center mt-4 gap-3">
                     <div class="serviço-card">
                         <div class="imagens-conteiner">
-                            <img src="imagens/layout_1.png" width="300" height="500">
+                            <img src="imagens/layout_1.png">
                         </div>
                         <h3>Escolha o layout</h3>
-                        <p> selecione o desine que mais chame sua atenção</p>
+                        <p1>Diversos modelos de sites prontos. Otimize seu tempo e esforço, edite seu site de forma
+                            rápida e pratica.</p1>
                     </div>
 
                     <div class="serviço-card">
-                        <div class="imagens-conteiner">
+                        <div class="imagens-conteiner-mg">
                             <img src="imagens/Preencher_1.png">
                         </div>
                         <h3>Preencha os preços</h3>
-                        <p> selecione fotos, descrições e preços dos seus produtos</p>
+                        <p1> selecione fotos, descrições e preços dos seus produtos</p1>
                     </div>
 
                     <div class="serviço-card">
                         <div class="imagens-conteiner">
-                            <img src="imagens/envio_1.png" width="300" height="500">
+                            <img src="imagens/envio_1.png">
                         </div>
                         <h3>Envie seu cardápio</h3>
-                        <p> Copie o link do site e envie em suas redes sociais</p>
+                        <p1> Conecte com as redes sociais. Adicione acesso rápido e divulgue seu negócio.</p1>
                     </div>
 
                 </div>
         </section>
 
+        <!-- SEÇÃO 02 -->
+        <section>
+            <div class="wrapper p-top">
+                <div class="text-center">
+                    <h5>Layouts</h5>
+                    <h2>Em destaque</h2>
+                </div>
+
+                <!--
+                <div class=" card-list text-center flex mt-4 gap-3">
+                    <div class="layout-card">
+                        <div class="card-imagem mt-4">
+                            <img src="imagens/modelo_layout_vazio.png">
+                        </div>
+                        <h4>Humburgeria</h4>
+                        <h4 class="descricao">Layout sem imagem definida</h4>
+                        <a href="#" class="btn">selecionar</a>
+                    </div>
+                    <div class="layout-card">
+                        <div class="card-imagem">
+                            <img src="imagens/modelo_layout.png">
+                        </div>
+                        <h4>Pizzaria</h4>
+                        <h4 class="descricao">Destaque da loja e horário de funcionamento</h4>
+                        <a href="#" class="btn">selecionar</a>
+                    </div>
+                    <div class="layout-card">
+                        <div class="card-imagem mt-4">
+                            <img src="imagens/modelo_layout_vazio.png">
+                        </div>
+                        <h4>Sushi</h4>
+                        <h4 class="descricao">Layout sem imagem definida</h4>
+                        <a href="#" class="btn">selecionar</a>
+                    </div>
+                    <div class="layout-card">
+                        <div class="card-imagem mt-4">
+                            <img src="imagens/modelo_layout_vazio.png">
+                        </div>
+                        <h4>Lanches</h4>
+                        <h4 class="descricao">Layout sem imagem definida</h4>
+                        <a href="#" class="btn">selecionar</a>
+                    </div>
+                </div>
+
+                -->
+
+                <!-- IDEIA DE CONTEINER (COMEÇO)-->
+                <div class="card-list text-center-mg flex mt-4 gap-3">
+                    <div class="layout-card">
+
+                        <!-- Swiper -->
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide p-top-min">
+                                    <div class="slide-content">
+                                        <img src="/imagens/modelo_layout.png">
+                                        <div class="info">
+                                            <h4>Pizzaria</h4>
+                                            <h4 class="descricao">Destaque da loja e horário de funcionamento</h4>
+                                            <a href="#" class="btn">selecionar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide p-top-min">
+                                    <div class="slide-content">
+                                        <img src="/imagens/modelo_layout_vazio.png">
+                                        <div class="info">
+                                            <h4>Humburgeria</h4>
+                                            <h4 class="descricao">Layout sem imagem definida</h4>
+                                            <a href="#" class="btn">selecionar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide p-top-min">
+                                    <div class="slide-content">
+                                        <img src="/imagens/modelo_layout_vazio.png">
+                                        <div class="info">
+                                            <h4>Comida asiática</h4>
+                                            <h4 class="descricao">Layout sem imagem definida</h4>
+                                            <a href="#" class="btn">selecionar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide p-top-min">
+                                    <div class="slide-content">
+                                        <img src="/imagens/modelo_layout_vazio.png">
+                                        <div class="info">
+                                            <h4>Lanche</h4>
+                                            <h4 class="descricao">Layout sem imagem definida</h4>
+                                            <a href="#" class="btn">selecionar</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="swiper-button-next seta">
+                                <a href="#">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+                            </div>
+                            <div class="swiper-button-prev seta">
+                                <a href="#">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                </a>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="autoplay-progress "></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- IDEIA DE CONTEINER (FIM) -->
+
+            </div>">
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO 03 -->
+        <section>
+            <div class="wrapper p-top flex gap-3">
+                <div class="sobre-conteiner flex gap-3">
+                    <div class="sobre-image">
+                        <img src="imagens/quem_somos_1.png">
+                    </div>
+
+                    <div class="content">
+                        <h5>Sobre nós</h5>
+                        <h2> Qual nosso objtivo?</h2>
+                        <p class="para">
+                            Nosso objetivo é trazer facilidade na criação de cardápios digitais,
+                            principalmente para empresas que não têm condições de
+                            arcar com o desenvolvimento de sites profissionais.
+                            Sabemos que, ao criar ou atualizar um site corporativo,
+                            surgem diversos desafios — desde verificar se a tecnologia está
+                            funcionando corretamente até garantir que o design esteja alinhado
+                            com o público-alvo. Pensando nisso, buscamos simplificar a criação de
+                            cardápios online de forma gratuita, ajudando negócios que não possuem
+                            infraestrutura para investir em plataformas caras.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
 
     </main>
 
     <!-- Parte do FOOTER -->
     <footer></footer>
 
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
 
 </html>
