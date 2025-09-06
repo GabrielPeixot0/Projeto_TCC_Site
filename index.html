@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SeuCardápio.</title>
+    <title>SeuCardápio/home.</title>
 
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/home.css">
     <link rel="stylesheet" href="./styles/mobile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
         integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
@@ -37,7 +37,7 @@
             </ul>
 
             <div class="desktop-action flex gap-2">
-                <a href="#">
+                <a href="#" class="login-icon">
                     <i class="fa-solid fa-user"></i>
                 </a>
 
@@ -63,6 +63,14 @@
                 <li>
                     <a href="#">Layouts</a>
                 </li>
+                <li>
+                    <a href="#">Contatos</a>
+                </li>
+                <a href="#" class="btn">
+                    Cadastrar
+                    &nbsp;
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                </a>
             </ul>
 
         </nav>
@@ -72,7 +80,7 @@
     <main>
         <section>
             <div class="hero-section flex wrapper gap-2">
-                <div class="content ">
+                <div class="content">
                     <h1> Faça o melhor cadárpio<br> para seu
                         <span>Négocio</span>
                     </h1>
@@ -81,10 +89,21 @@
                         Atraia mais clientes e destaque-se no mercado com SeuCardápio.
                     </p>
                     <div class="flex gap-2">
-                        <a href="#" class="btn">
-                            Começar agora
+                        <a href="#" class="btn">Começar agora
                             &nbsp;
+                        </a>
 
+                        <a href="#" class="social-icon">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fa-brands fa-google"></i>
                         </a>
                     </div>
                 </div>
@@ -94,7 +113,7 @@
 
         <!-- SEÇÃO 01 -->
         <section>
-            <div class="wrapper p-top">
+            <div class="wrapper p-top mt-4">
                 <div class="text-center">
                     <h5>Nossos serviços</h5>
                     <h2>Como funciona?</h2>
@@ -131,7 +150,7 @@
 
         <!-- SEÇÃO 02 -->
         <section>
-            <div class="wrapper p-top">
+            <div class="wrapper p-top mt-4">
                 <div class="text-center">
                     <h5>Layouts</h5>
                     <h2>Em destaque</h2>
@@ -176,9 +195,8 @@
                 -->
 
                 <!-- IDEIA DE CONTEINER (COMEÇO)-->
-                <div class="card-list text-center-mg flex mt-4 gap-3">
-                    <div class="layout-card">
-
+                <div class="layout-card text-center-mg flex mt-4 gap-3">
+                
                         <!-- Swiper -->
                         <div class="swiper mySwiper">
                             <div class="swiper-wrapper">
@@ -186,9 +204,9 @@
                                     <div class="slide-content">
                                         <img src="/imagens/modelo_layout.png">
                                         <div class="info">
-                                            <h4>Pizzaria</h4>
+                                            <h3>Pizzaria</h3>
                                             <h4 class="descricao">Destaque da loja e horário de funcionamento</h4>
-                                            <a href="#" class="btn">selecionar</a>
+                                            <a href="#" class="btn-pizzaria">selecionar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -196,7 +214,7 @@
                                     <div class="slide-content">
                                         <img src="/imagens/modelo_layout_vazio.png">
                                         <div class="info">
-                                            <h4>Humburgeria</h4>
+                                            <h3>Humburgeria</h3>
                                             <h4 class="descricao">Layout sem imagem definida</h4>
                                             <a href="#" class="btn">selecionar</a>
                                         </div>
@@ -206,7 +224,7 @@
                                     <div class="slide-content">
                                         <img src="/imagens/modelo_layout_vazio.png">
                                         <div class="info">
-                                            <h4>Comida asiática</h4>
+                                            <h3>Comida asiática</h3>
                                             <h4 class="descricao">Layout sem imagem definida</h4>
                                             <a href="#" class="btn">selecionar</a>
                                         </div>
@@ -216,7 +234,7 @@
                                     <div class="slide-content">
                                         <img src="/imagens/modelo_layout_vazio.png">
                                         <div class="info">
-                                            <h4>Lanche</h4>
+                                            <h3>Lanche</h3>
                                             <h4 class="descricao">Layout sem imagem definida</h4>
                                             <a href="#" class="btn">selecionar</a>
                                         </div>
@@ -236,20 +254,18 @@
                                 </a>
                             </div>
                             <div class="swiper-pagination"></div>
-                            <div class="autoplay-progress "></div>
+                            <div class="autoplay-progress"></div>
                         </div>
-                    </div>
+                    
                 </div>
                 <!-- IDEIA DE CONTEINER (FIM) -->
 
-            </div>">
-
-            </div>
+            
         </section>
 
         <!-- SEÇÃO 03 -->
         <section>
-            <div class="wrapper p-top flex gap-3">
+            <div class="wrapper p-top">
                 <div class="sobre-conteiner flex gap-3">
                     <div class="sobre-image">
                         <img src="imagens/quem_somos_1.png">
@@ -258,17 +274,17 @@
                     <div class="content">
                         <h5>Sobre nós</h5>
                         <h2> Qual nosso objtivo?</h2>
-                        <p class="para">
+                        <p1 class="para">
                             Nosso objetivo é trazer facilidade na criação de cardápios digitais,
                             principalmente para empresas que não têm condições de
-                            arcar com o desenvolvimento de sites profissionais.
+                            arcar com o desenvolvimento de sites profissionais.<br>
                             Sabemos que, ao criar ou atualizar um site corporativo,
                             surgem diversos desafios — desde verificar se a tecnologia está
                             funcionando corretamente até garantir que o design esteja alinhado
                             com o público-alvo. Pensando nisso, buscamos simplificar a criação de
                             cardápios online de forma gratuita, ajudando negócios que não possuem
                             infraestrutura para investir em plataformas caras.
-                        </p>
+                        </p1>
                     </div>
                 </div>
 
@@ -278,7 +294,78 @@
     </main>
 
     <!-- Parte do FOOTER -->
-    <footer></footer>
+    <footer>
+        <div class="footer-conteiner">
+            <div class="flex wrapper gap-3">
+                <div class="footer-wrapper">
+                    <a href="#" class="logo">SeuCardápio.</a>
+                    <p1 class="mt-one-half">
+                        Atraia mais clientes e destaque-se<br>
+                        no mercado, faça SeuCardápio.
+                    </p1>
+                    <div class="flex gap-2 mt-one-half">
+                        <a href="#" class="social-icon">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                <ul class="footer-wrapper">
+                    <li>
+                        <h4>Serviços</h4>
+                    </li>
+                    <li class="mt-one-half">
+                        <a href="#" class="footer-link"> Layouts</a>
+                    </li>
+                    <li class="mt-one-half">
+                        <a href="#" class="footer-link"> Destaques</a>
+                    </li>
+                    <li class="mt-one-half">
+                        <a href="#" class="footer-link"> Categorias</a>
+                    </li>
+                </ul>
+
+                <ul class="footer-wrapper">
+                    <li>
+                        <h4>Empresa</h4>
+                    </li>
+                    <li class="mt-one-half">
+                        <a href="#" class="footer-link"> Sobre nós</a>
+                    </li>
+                    <li class="mt-one-half">
+                        <a href="#" class="footer-link"> Avisos legais<br>e privacidade</a>
+                    </li>
+                    <li class="mt-one-half">
+                        <a href="#" class="footer-link"> FAQ's</a>
+                    </li>
+                </ul>
+
+                <ul class="footer-wrapper">
+                    <li>
+                        <h4>Suporte</h4>
+                    </li>
+                    <li class="mt-one-half">
+                        <a href="#" class="footer-link"> Contatos</a>
+                    </li>
+                    <li class="mt-one-half">
+                        <a href="#" class="footer-link"> Feedback</a>
+                    </li>
+                    <li class="mt-one-half">
+                        <a href="#" class="footer-link"> Login</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </footer>
 
 
 

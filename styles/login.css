@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Candal&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Condensed", sans-serif;
+    /*border: .1rem solid red;*/
+}
+
+:root {
+    --lead: #212121;
+    --gold-finger: #F2BD12;
+    --gold-finger-claro: #f5dd9d;
+    --eye-ball: #FFFdF7;
+    --hint-yellow: #f8f6f0;
+    --amarelo-claro: #f5efdf;
+    --pure-white: #FFF;
+    --cinza: rgb(187, 184, 184);
+    --cinza-escuro: #797979;
+}
+
+body {
+    background: var(--hint-yellow);
+}
+
+/* ---------------  Estilo Basico  --------------------------------------*/
+a {
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: var(--lead);
+
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/*poe as seçoes na horizontal*/
+li {
+    list-style: none;
+
+}
+
+a {
+    font-size: 20px;
+}
+
+.between {
+    justify-content: space-between;
+}
+
+/*espaçamento entre as seções*/
+.gap-2 {
+    gap: 2rem;
+}
+
+.gap-3 {
+    gap: 3rem;
+}
+
+.gap-4 {
+    gap: 4rem;
+}
+
+.gap-5 {
+    gap: 5rem;
+}
+
+.wrapper {
+    max-width: 1800px;
+    margin: auto;
+    padding-inline: 1rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+    display: block;
+}
+
+.p-top {
+    padding-top: 9rem;
+}
+
+.p-top-min {
+    padding-top: 3rem;
+}
+
+.text-center {
+    padding-left: 5cm;
+    padding-right: 5cm;
+    text-align: center;
+}
+
+.mt-4 {
+    margin-top: 4rem;
+}
+
+.mt-half {
+    margin-top: 2rem;
+}
+
+.mt-auto {
+    margin-top: auto;
+}
+
+.mt-one-half {
+    margin-top: 1.5rem;
+}
+
+
+
+/*-------------------    Estilo do cabeçalho    -------------------------------*/
+
+header {
+    max-width: 100%;
+    background-color: var(--gold-finger-claro);
+    text-align: center;
+}
+
+.navbar {
+    min-height: 14vh;
+}
+
+.navbar::after {
+    content: "";
+    display: block;
+    width: 180px;
+    /* largura parecida com o botão de cadastro */
+}
+
+
+.logo {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--gold-finger);
+    font-family: "Lavishly Yours", cursive;
+    font-weight: 800;
+    text-shadow:
+        -0.5px -0.5px 0 black,
+        0.5px -0.5px 0 black,
+        -0.5px 0.5px 0 black,
+        0.5px 0.5px 0 black;
+}
+
+
+.desktop-action .menu {
+    font-size: 1.5rem;
+    display: none;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+
+
+
+/*------------------    Estilo das Seções    --------------------------------------------*/
+.hero-section {
+    height: 600px;
+    background-image: url('../imagens/headerHome2.JPG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+
+}
+
+.content,
+.imagens-conteiner,
+.serviço-card {
+    flex: 1;
+    flex-basis: 300px;
+}
+
+h1 {
+    /* texto promocional Maior */
+    font-size: clamp(1.5rem, 4vw, 3.5rem);
+    color: var(--eye-ball);
+    /*cor da home page */
+}
+
+h1 span {
+    color: var(--gold-finger);
+    /*cor dos botões */
+}
+
+p {
+    /* texto promocional pequeno */
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 1.25rem;
+    color: rgb(187, 184, 184);
+    line-height: 1.8rem;
+    font-weight: 450;
+
+}
+
+p1 {
+    /* texto promocional pequeno varição*/
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 1.25rem;
+    color: var(--cinza-escuro);
+    line-height: 1.8rem;
+    font-weight: 450;
+
+}
+
+.para {
+    margin-block: 2rem;
+    max-width: 550px;
+}
+
+.social-icon {
+    background: var(--hint-yellow);
+    width: 3rem;
+    aspect-ratio: 1;
+    border-radius: 1rem;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 3rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 1px;
+    transition: .3s ease-in-out;
+}
+
+.social-icon:hover {
+    background: var(--lead);
+    color: var(--pure-white);
+
+}
+
+
+
+
+
+
+/*------------------   Estilo do Rodapé    --------------------------------------------*/
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+.footer-conteiner {
+    margin-top: 13rem;
+    padding-block: 4rem;
+    gap: 3rem;
+    background: var(--gold-finger-claro);
+    height: 350px;
+    border-radius: 2rem 2rem 0 0;
+}
+
+.footer-conteiner .flex {
+    align-items: flex-start;
+}
+
+.footer-wrapper {
+    flex: 1;
+    flex-basis: 150px;
+}
+
+.footer-wrapper:nth-child(1) {
+    flex: 2;
+    flex-basis: 300px;
+}
+
+.footer-wrapper:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* alinha tudo à esquerda */
+    gap: 0.5rem;
+    /* espaçamento entre logo, texto e ícones */
+}
+
+.footer-wrapper .social-icon {
+    background: var(--pure-white);
+}
+
+.footer-wrapper .social-icon:hover {
+    background: var(--lead);
+    color: var(--pure-white);
+}
+
+.footer-link {
+    color: var(--cinza-escuro);
+    font-size: 1.1rem;
+    transition: .3 ease-in-out;
+}
+
+.footer-link:hover {
+    color: var(--lead);
+}
+
