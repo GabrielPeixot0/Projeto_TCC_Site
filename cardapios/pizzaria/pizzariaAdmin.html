@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../styles/layouts/pizzaria.css">
-    <link rel="stylesheet" href="./styles/mobile.css">
+    <link rel="stylesheet" href="../../styles/layouts/pizzaria.css">
+    <link rel="stylesheet" href="../../styles/mobile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
         integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -86,7 +86,7 @@
             <div class="banner">
                 <div class="w-full h-[420px] bg-home bg-cover bg-center">
                     <div class="w-full h-full flex flex-col justify-center items-center bg-black bg-opacity-50">
-                        <img src="../imagens/Logo.jpeg" alt="Logo da Pizza"
+                        <img src="../../imagens/Logo.jpeg" alt="Logo da Pizza"
                             class="w-32 h-32 rounded-full shadow-lg hover:scale-110 duration-200" />
                         <h1 class="text-4xl font-bold text-white">
                             Pizzaria Recanto
@@ -113,33 +113,47 @@
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16">
 
                     <!--Produto Item 1 -->
-                    <div class="flex gap-3">
-                        <img src="../imagens/Pizza Italiana.avif" alt="Pizza Italiana"
-                            class="w-28 h-28 rounded-md hover:scan-11 hover:scale-110 duration-300" />
+                    <!-- Card de Produto Editável -->
+                    <div class="produto-card flex rounded-md shadow-md" id="produto-card">
 
-
-                        <div class="flex-1 flex flex-col justify-between mt-4">
-                            <div>
-                                <p1 class="font-bold">Pizza Italiana</p1>
-                                <p class="text-sm"> Molho, Mussarela, Tomate pequeno, cebola, Manjericao.</p>
-                            </div>
-
-                            <div class="flex items-center gap-2 justify-between">
-                                <p1 class="font-blond text-lg">R$ 24.90</p1>
-                                <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Pizza Italiana"
-                                    data-price="24.90">
-
-                                    <i class="fa fa-cart-plus text-lg text-white"></i>
-                                </button>
-                            </div>
+                        <!-- Upload de Imagem -->
+                        <div class="upload-box">
+                            <label for="produto-imagem">
+                                <div class="upload-preview" id="preview">
+                                    <span>+</span>
+                                    <p>Adicionar imagem</p>
+                                </div>
+                            </label>
+                            <input type="file" id="produto-imagem"  accept="image/*" hidden>
                         </div>
 
+                        <!-- Formulário -->
+                        <div class="flex flex-col">
+                            <div class="inputs" id="form-area">
+                                <input type="text" id="produto-nome" placeholder="Adicionar nome" class="input-text">
+                                <textarea id="produto-descricao" placeholder="Adicionar descrição ..."
+                                    class="input-text"></textarea>
+                                <input type="number" id="produto-preco" placeholder="Adicionar Preço ..."
+                                    class="input-text">
+                            </div>
+
+                            <!-- Botões -->
+                            <div class="flex gap-2 mt-2" id="form-buttons">
+                                <button class="btn salvar" id="btn-salvar">Salvar</button>
+                                <button class="btn cancelar" id="btn-cancelar">Cancelar</button>
+                            </div>
+
+                            <!-- Botão Editar (aparece depois de salvar) -->
+                            <div id="edit-area" style="display:none; text-align:center; margin-top:10px;">
+                                <button id="btn-editar" class="btn editar">Editar</button>
+                            </div>
+                        </div>
                     </div>
                     <!--FIM DO PRODUTO-->
 
                     <!--Produto Item 2 -->
                     <div class="flex gap-3">
-                        <img src="../imagens/Pizza 5 queijos.avif" alt="Pizza 5 queijos"
+                        <img src="../../imagens/Pizza 5 queijos.avif" alt="Pizza 5 queijos"
                             class="w-28 h-28 rounded-md hover:scan-11 hover:scale-110 duration-300" />
 
                         <div class="flex-1">
@@ -161,7 +175,7 @@
 
                     <!--Produto Item 3 -->
                     <div class="flex gap-3">
-                        <img src="../imagens/Pizza de Peperoni.jpg" alt="Pizza de Peperoni"
+                        <img src="../../imagens/Pizza de Peperoni.jpg" alt="Pizza de Peperoni"
                             class="w-28 h-28 rounded-md hover:scan-11 hover:scale-110 duration-300" />
 
                         <div class="flex-1">
@@ -183,7 +197,7 @@
 
                     <!--Produto Item 4 -->
                     <div class="flex gap-3">
-                        <img src="../imagens/Pizza de Bacon.avif" alt="Pizza de Bacon"
+                        <img src="../../imagens/Pizza de Bacon.avif" alt="Pizza de Bacon"
                             class="w-28 h-28 rounded-md hover:scan-11 hover:scale-110 duration-300" />
 
                         <div class="flex-1">
@@ -205,7 +219,7 @@
 
                     <!--Produto Item 5 -->
                     <div class="flex gap-3">
-                        <img src="../imagens/Pizza Portuguesa.webp" alt="Pizza Portuguesa"
+                        <img src="../../imagens/Pizza Portuguesa.webp" alt="Pizza Portuguesa"
                             class="w-28 h-28 rounded-md hover:scan-11 hover:scale-110 duration-300" />
 
                         <div class="flex-1">
@@ -228,7 +242,7 @@
 
                     <!--Produto Item 6 -->
                     <div class="flex gap-3">
-                        <img src="../imagens/Pizza Frango Catupiry.jpg" alt="Pizza Frango com Catupiry"
+                        <img src="../../imagens/Pizza Frango Catupiry.jpg" alt="Pizza Frango com Catupiry"
                             class="w-28 h-28 rounded-md hover:scan-11 hover:scale-110 duration-300" />
 
                         <div class="flex-1">
@@ -250,11 +264,11 @@
 
                     <!--Produto Item 7 -->
                     <div class="flex gap-3">
-                        <img src="../imagens/Pizza Tomate.avif" alt="Pizza de Tomate"
+                        <img src="../../imagens/Pizza Tomate.avif" alt="Pizza de Tomate"
                             class="w-28 h-28 rounded-md hover:scan-11 hover:scale-110 duration-300" />
 
                         <div class="flex-1">
-                            <p class="font-bold">Pizza de Tomate </p>
+                            <p1 class="font-bold">Pizza de Tomate </p1>
                             <p class="text-sm">Molho, Mussarela, Tomate, tomate pequeno, azeitona preta, cebola, alface
                                 americano.</p>
 
@@ -273,7 +287,7 @@
 
                     <!--Produto Item 8 -->
                     <div class="flex gap-3">
-                        <img src="../imagens/Pizza Cereja.jpg" alt="Pizza Cereja"
+                        <img src="../../imagens/Pizza Cereja.jpg" alt="Pizza Cereja"
                             class="w-28 h-28 rounded-md hover:scan-11 hover:scale-110 duration-300" />
 
                         <div class="flex-1">
@@ -295,7 +309,7 @@
 
                     <!--Produto Item 9 -->
                     <div class="flex gap-3">
-                        <img src="../imagens/Pizza Doce.avif" alt="Pizza Doce"
+                        <img src="../../imagens/Pizza Doce.avif" alt="Pizza Doce"
                             class="w-28 h-28 rounded-md hover:scan-11 hover:scale-110 duration-300" />
 
                         <div class="flex-1">
@@ -319,7 +333,7 @@
         </section>
 
 
-        <!--  BEBIDAS  -->          
+        <!--  BEBIDAS  -->
         <section>
             <div class="mx-auto max-w-7xl px-2 my-2 ">
                 <h2 class="front-blond text-3xl">Bebidas</h2>
@@ -330,7 +344,7 @@
                     id="bebidas">
                     <!--  Produto Item BEBIDA 1 -->
                     <div class="flex gap-2 w-full">
-                        <img src="../imagens/Coca-cola.png" alt="Coca-cola"
+                        <img src="../../imagens/Coca-cola.png" alt="Coca-cola"
                             class="w-28 h-28 rounded-md hover:scan-11 hover:scale-110 duration-300" />
 
                         <div class="w-full">
@@ -350,7 +364,7 @@
 
                     <!--  Produto Item BEBIDA 2  -->
                     <div class="flex gap-2">
-                        <img src="../imagens/Guarana Antartica.png" alt="Guarana"
+                        <img src="../../imagens/Guarana Antartica.png" alt="Guarana"
                             class="w-28 h-28 rounded-md hover:scan-11 hover:scale-110 duration-300" />
 
                         <div class="w-full">
@@ -394,7 +408,8 @@
                             class="w-full border-2 p-1 rounded my-1" />
 
                         <p class="text-red-500 hidden" id="address-warn">Digite seu endereco completo!</p>
-                        <p class="text-red-500 hidden" id="address-warn-cart-empty">Adicione itens para finalizar sua compra!</p>
+                        <p class="text-red-500 hidden" id="address-warn-cart-empty">Adicione itens para finalizar sua
+                            compra!</p>
 
                         <div class="flex items-center justify-between mt-5 w-full">
                             <button id="close-modal-btn" class="bg-red-600 text-white px-4 py-1 rounded">Fechar</button>
@@ -405,7 +420,7 @@
                 </div>
             </div>
         </section>
-    
+
 
         <!--CART-->
         <section>
@@ -497,7 +512,7 @@
     </footer>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="../scripts/pizzaria/pizzaria.js"></script>
+    <script src="../../scripts/pizzaria/pizzaria.js"></script>
 
 </body>
 

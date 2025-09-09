@@ -1,116 +1,117 @@
 @import url('https://fonts.googleapis.com/css2?family=Candal&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Roboto Condensed", sans-serif;
-    /*border: .1rem solid red;*/
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto Condensed", sans-serif;
+  /*border: .1rem solid red;*/
 }
 
 :root {
-    --lead: #212121;
-    --gold-finger: #F2BD12;
-    --gold-finger-claro: #f5dd9d;
-    --eye-ball: #FFFdF7;
-    --hint-yellow: #f8f6f0;
-    --amarelo-claro: #f5efdf;
-    --pure-white: #FFF;
-    --cinza: rgb(187, 184, 184);
-    --cinza-escuro: #797979;
+  --vermelho-claro: #eb2d37;
+  --lead: #212121;
+  --gold-finger: #F2BD12;
+  --gold-finger-claro: #f5dd9d;
+  --eye-ball: #FFFdF7;
+  --hint-yellow: #f8f6f0;
+  --amarelo-claro: #f5efdf;
+  --pure-white: #FFF;
+  --cinza: rgb(187, 184, 184);
+  --cinza-escuro: #797979;
 }
 
 body {
-    background: var(--hint-yellow);
+  background: var(--hint-yellow);
 }
 
 /* ---------------  Estilo Basico  --------------------------------------*/
 a {
-    font-size: 1.1rem;
-    text-decoration: none;
-    color: var(--lead);
-    font-family: "Roboto Condensed", sans-serif;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: var(--lead);
+  font-family: "Roboto Condensed", sans-serif;
 
 }
 
 .flex {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 /*poe as seçoes na horizontal*/
 li {
-    list-style: none;
+  list-style: none;
 
 }
 
 a {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .between {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 /*espaçamento entre as seções*/
 .gap-2 {
-    gap: 2rem;
+  gap: 2rem;
 }
 
 .gap-3 {
-    gap: 3rem;
+  gap: 3rem;
 }
 
 .gap-4 {
-    gap: 4rem;
+  gap: 4rem;
 }
 
 .gap-5 {
-    gap: 5rem;
+  gap: 5rem;
 }
 
 .wrapper {
-    max-width: 1800px;
-    margin: auto;
-    padding-inline: 1rem;
+  max-width: 1800px;
+  margin: auto;
+  padding-inline: 1rem;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
-    margin: auto;
-    display: block;
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+  display: block;
 }
 
 .p-top {
-    padding-top: 9rem;
+  padding-top: 9rem;
 }
 
 .p-top-min {
-    padding-top: 3rem;
+  padding-top: 3rem;
 }
 
 .text-center {
-    padding-left: 5cm;
-    padding-right: 5cm;
-    text-align: center;
+  padding-left: 5cm;
+  padding-right: 5cm;
+  text-align: center;
 }
 
 .mt-4 {
-    margin-top: 4rem;
+  margin-top: 4rem;
 }
 
 .mt-half {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .mt-auto {
-    margin-top: auto;
+  margin-top: auto;
 }
 
 .mt-one-half {
-    margin-top: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 
@@ -118,44 +119,44 @@ img {
 /*-------------------    Estilo do cabeçalho    -------------------------------*/
 
 header {
-    max-width: 100%;
-    background-color: var(--gold-finger-claro);
-    text-align: center;
+  max-width: 100%;
+  background-color: var(--gold-finger-claro);
+  text-align: center;
 }
 
 .navbar {
-    min-height: 14vh;
+  min-height: 14vh;
 }
 
 .navbar::after {
-    content: "";
-    display: block;
-    width: 180px;
-    /* largura parecida com o botão de cadastro */
+  content: "";
+  display: block;
+  width: 180px;
+  /* largura parecida com o botão de cadastro */
 }
 
 
 .logo {
-    font-size: 3rem;
-    font-weight: bold;
-    color: var(--gold-finger);
-    font-family: "Lavishly Yours", cursive;
-    font-weight: 800;
-    text-shadow:
-        -0.5px -0.5px 0 black,
-        0.5px -0.5px 0 black,
-        -0.5px 0.5px 0 black,
-        0.5px 0.5px 0 black;
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--gold-finger);
+  font-family: "Lavishly Yours", cursive;
+  font-weight: 800;
+  text-shadow:
+    -0.5px -0.5px 0 black,
+    0.5px -0.5px 0 black,
+    -0.5px 0.5px 0 black,
+    0.5px 0.5px 0 black;
 }
 
 
 .desktop-action .menu {
-    font-size: 1.5rem;
-    display: none;
+  font-size: 1.5rem;
+  display: none;
 }
 
 .mobile-menu {
-    display: none;
+  display: none;
 }
 
 
@@ -163,89 +164,89 @@ header {
 
 /*------------------    Estilo das Seções    --------------------------------------------*/
 .hero-section {
-    height: 600px;
-    background-image: url('../imagens/headerHome2.JPG');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px;
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
+  height: 600px;
+  background-image: url('../imagens/headerHome2.JPG');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
 
 }
 
 .content,
 .imagens-conteiner,
 .serviço-card {
-    flex: 1;
-    flex-basis: 300px;
+  flex: 1;
+  flex-basis: 300px;
 }
 
 h1 {
-    /* texto promocional Maior */
-    font-size: clamp(1.5rem, 4vw, 3.5rem);
-    color: var(--eye-ball);
-    /*cor da home page */
+  /* texto promocional Maior */
+  font-size: clamp(1.5rem, 4vw, 3.5rem);
+  color: var(--eye-ball);
+  /*cor da home page */
 }
 
 h1 span {
-    color: var(--gold-finger);
-    /*cor dos botões */
+  color: var(--gold-finger);
+  /*cor dos botões */
 }
 
 p {
-    /* texto promocional pequeno */
-    font-family: "Roboto Condensed", sans-serif;
-    font-size: 1.5rem;
-    color: rgb(172, 171, 171);
-    line-height: 1.8rem;
-    font-weight: 450;
+  /* texto promocional pequeno */
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1.5rem;
+  color: rgb(172, 171, 171);
+  line-height: 1.8rem;
+  font-weight: 450;
 
 }
 
 p1 {
-    /* texto promocional pequeno varição*/
-    font-family: "Roboto Condensed", sans-serif;
-    font-size: 1.25rem;
-    color: var(--cinza-escuro);
-    line-height: 1.8rem;
-    font-weight: 450;
+  /* texto promocional pequeno varição*/
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1.25rem;
+  color: var(--cinza-escuro);
+  line-height: 1.8rem;
+  font-weight: 450;
 }
 
-.nome{
+.nome {
   color: var(--lead);
   font-family: "Roboto Condensed", sans-serif;
-  
+
 }
 
-.texto{
+.texto {
   color: var(--lead);
 }
 
 .para {
-    margin-block: 2rem;
-    max-width: 550px;
+  margin-block: 2rem;
+  max-width: 550px;
 }
 
 .social-icon {
-    background: var(--hint-yellow);
-    width: 3rem;
-    aspect-ratio: 1;
-    border-radius: 1rem;
-    font-size: 1.2rem;
-    text-align: center;
-    line-height: 3rem;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 1px;
-    transition: .3s ease-in-out;
+  background: var(--hint-yellow);
+  width: 3rem;
+  aspect-ratio: 1;
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 3rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 1px;
+  transition: .3s ease-in-out;
 }
 
 .social-icon:hover {
-    background: var(--lead);
-    color: var(--pure-white);
+  background: var(--lead);
+  color: var(--pure-white);
 
 }
 
@@ -266,60 +267,290 @@ footer {
 */
 
 .footer-conteiner {
-    margin-top: 1rem;
-    padding-block: 4rem;
-    gap: 3rem;
-    background: var(--gold-finger-claro);
-    height: 350px;
-    border-radius: 2rem 2rem 0 0;
+  margin-top: 1rem;
+  padding-block: 4rem;
+  gap: 3rem;
+  background: var(--gold-finger-claro);
+  height: 350px;
+  border-radius: 2rem 2rem 0 0;
 }
 
 .footer-conteiner .flex {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 
 .footer-wrapper {
-    flex: 1;
-    flex-basis: 150px;
+  flex: 1;
+  flex-basis: 150px;
 }
 
 .footer-wrapper:nth-child(1) {
-    flex: 2;
-    flex-basis: 300px;
+  flex: 2;
+  flex-basis: 300px;
 }
 
 .footer-wrapper:first-child {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    /* alinha tudo à esquerda */
-    gap: 0.5rem;
-    /* espaçamento entre logo, texto e ícones */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* alinha tudo à esquerda */
+  gap: 0.5rem;
+  /* espaçamento entre logo, texto e ícones */
 }
 
 .footer-wrapper .social-icon {
-    background: var(--pure-white);
+  background: var(--pure-white);
 }
 
 .footer-wrapper .social-icon:hover {
-    background: var(--lead);
-    color: var(--pure-white);
+  background: var(--lead);
+  color: var(--pure-white);
 }
 
 .footer-link {
-    color: var(--cinza-escuro);
-    font-size: 1.1rem;
-    transition: .3 ease-in-out;
+  color: var(--cinza-escuro);
+  font-size: 1.1rem;
+  transition: .3 ease-in-out;
 }
 
 .footer-link:hover {
-    color: var(--lead);
+  color: var(--lead);
 }
+
+
+
+
+/*------------------   Queries Midia   --------------------------------------------*/
+@media screen and (max-width: 930px) {
+
+/*--------------     Rodapé da Página   -------------------*/
+    .footer-conteiner {
+        margin-top: 13rem;
+        padding-block: 4rem;
+        gap: 3rem;
+        background: var(--gold-finger-claro);
+        height: 730px;
+        border-radius: 2rem 2rem 0 0;
+    }
+
+    .footer-conteiner .flex {
+        align-items: flex-start;
+    }
+
+
+
+
+}
+
+
+
+
+
+/*----------------   Pizzaria produtos -----------------------*/
+
+/* Produto Card: imagem à esquerda e conteúdo à direita */
+.produto-card {
+  display: flex;
+  flex-direction: row;   /* lado a lado */
+  align-items: flex-start;
+  flex-wrap: nowrap;     /* impede que a descrição quebre para baixo */
+  gap: 3rem;             /* espaço entre imagem e descrição */
+  max-width: 700px;
+  border: 1px solid var(--cinza);
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+/* Área de texto / inputs ao lado da imagem */
+.produto-card > .flex.flex-col {
+  flex: 2;          /* ocupa o restante do espaço */
+  min-width: 30px;     /* evita quebra */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
+/* Nome do produto */
+#produto-card .nome {
+  font-size: 1.3rem;
+  font-weight: 650;
+  color: var(--cinza-escuro);
+}
+
+/* Descrição*/
+#produto-card .descricao {
+  font-weight: 500;
+  margin-top: 13px;
+  font-size: 15px;
+  color: var(--cinza);
+  line-height: 20px;
+}
+
+
+/* Descrição Imagem*/
+#produto-card p {
+  font-size: 1rem;
+  color: var(--cinza-escuro);
+  margin: 2px 0;
+  line-height: 1.4;
+}
+
+/* Preço */
+#produto-card p strong,
+#produto-card p.preco {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--cinza-escuro);
+}
+
+/*Botão do carrinho */
+#produto-card .add-to-cart-btn {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1)) /* #111827 */;
+  border: none;
+  border-radius: 4px;
+  padding: 7px 21px;
+  margin-top: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+
+#produto-card .add-to-cart-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Caixa de imagem (upload ou preview) */
+.upload-box {
+  flex: 0 0 7rem;        /* tamanho fixo */
+  width: 7rem;
+  height: 7rem;
+  min-width: 7rem;
+  min-height: 7rem;
+  border-radius: 6px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ 
+
+
+.upload-preview {
+  width: 8rem;
+  height: 8rem;
+  border: 2px dashed var(--cinza-escuro);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--cinza-escuro);
+  font-size: 1rem;
+  text-align: center;
+  overflow: hidden; /* garante que a imagem não estoure */
+}
+
+.upload-preview img {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 0;
+  transition: transform 300ms ease;
+
+}
+
+.upload-preview img:hover {
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  transition-duration: 300ms;
+}
+
+
+.upload-preview span {
+  font-size: 1.5rem;
+}
+
+/* Inputs no modo edição */
+.input-text {
+  width: 100%;
+  max-width: 450px;  /* limite maior de largura (ajuste conforme necessário) */
+  margin: 3px 0;
+  box-sizing: border-box;
+  padding: 5px;
+  border: 1px solid var(--cinza);
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-text:focus {
+  border-color: var(--gold-finger);
+  box-shadow: 0 0 4px var(--gold-finger-claro);
+}
+
+.btn {
+  flex: 1;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn.salvar {
+  background: var(--gold-finger);
+  color: var(--lead);
+  font-weight: bold;
+  margin: 5px;
+}
+
+.btn.salvar:hover {
+  background: #e0aa0c;
+}
+
+.btn.cancelar {
+  background: var(--cinza);
+  color: var(--pure-white);
+  margin: 5px;
+}
+
+.btn.cancelar:hover {
+  background: var(--cinza-escuro);
+}
+
+.btn.editar {
+  background: rgb(158, 157, 157);
+  font-weight: bold;
+  color: var(--pure-white);
+  width: 80%;
+  margin: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.btn.editar:hover {
+  background: var(--cinza-escuro);
+}
+
+
 
 
 /*------------------------------------------------------                 Estilo do Tailwind                  -----------------------------------------------------------------------*/
 
-*, ::before, ::after {
+*,
+::before,
+::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -329,19 +560,19 @@ footer {
   --tw-skew-y: 0;
   --tw-scale-x: 1;
   --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
+  --tw-pan-x: ;
+  --tw-pan-y: ;
+  --tw-pinch-zoom: ;
   --tw-scroll-snap-strictness: proximity;
-  --tw-gradient-from-position:  ;
-  --tw-gradient-via-position:  ;
-  --tw-gradient-to-position:  ;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+  --tw-ordinal: ;
+  --tw-slashed-zero: ;
+  --tw-numeric-figure: ;
+  --tw-numeric-spacing: ;
+  --tw-numeric-fraction: ;
+  --tw-ring-inset: ;
   --tw-ring-offset-width: 0px;
   --tw-ring-offset-color: #fff;
   --tw-ring-color: rgb(59 130 246 / 0.5);
@@ -349,28 +580,28 @@ footer {
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
-  --tw-contain-size:  ;
-  --tw-contain-layout:  ;
-  --tw-contain-paint:  ;
-  --tw-contain-style:  ;
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+  --tw-backdrop-blur: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: ;
+  --tw-contain-size: ;
+  --tw-contain-layout: ;
+  --tw-contain-paint: ;
+  --tw-contain-style: ;
 }
 
 ::backdrop {
@@ -383,19 +614,19 @@ footer {
   --tw-skew-y: 0;
   --tw-scale-x: 1;
   --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
+  --tw-pan-x: ;
+  --tw-pan-y: ;
+  --tw-pinch-zoom: ;
   --tw-scroll-snap-strictness: proximity;
-  --tw-gradient-from-position:  ;
-  --tw-gradient-via-position:  ;
-  --tw-gradient-to-position:  ;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+  --tw-ordinal: ;
+  --tw-slashed-zero: ;
+  --tw-numeric-figure: ;
+  --tw-numeric-spacing: ;
+  --tw-numeric-fraction: ;
+  --tw-ring-inset: ;
   --tw-ring-offset-width: 0px;
   --tw-ring-offset-color: #fff;
   --tw-ring-color: rgb(59 130 246 / 0.5);
@@ -403,28 +634,28 @@ footer {
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
-  --tw-contain-size:  ;
-  --tw-contain-layout:  ;
-  --tw-contain-paint:  ;
-  --tw-contain-style:  ;
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+  --tw-backdrop-blur: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: ;
+  --tw-contain-size: ;
+  --tw-contain-layout: ;
+  --tw-contain-paint: ;
+  --tw-contain-style: ;
 }
 
 /*
@@ -436,29 +667,38 @@ footer {
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
-#date-span { margin-bottom: 3rem; } /* ajuste o valor à vontade */
+#date-span {
+  margin-bottom: 3rem;
+}
+
+/* ajuste o valor à vontade */
 
 .menu .flex {
-    align-items: flex-start; /* alinha pelo topo */
-    align-items: stretch; /* força altura igual */
+  align-items: flex-start;
+  /* alinha pelo topo */
+  align-items: stretch;
+  /* força altura igual */
 }
 
 .menu img {
-    flex-shrink: 0; /* evita que a imagem seja comprimida */
+  flex-shrink: 0;
+  /* evita que a imagem seja comprimida */
 }
 
-.menu .flex > div {
-    flex: 1; /* faz a descrição ocupar o espaço restante */
+.menu .flex>div {
+  flex: 1;
+  /* faz a descrição ocupar o espaço restante */
 }
 
 .menu .flex-1 {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* descrição em cima, botão embaixo */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* descrição em cima, botão embaixo */
 }
 
 .cart {
-  margin-bottom: 0; 
+  margin-bottom: 0;
 
   justify-content: center;
   width: 100%;
@@ -466,14 +706,19 @@ footer {
 
 /* botão maior, retangular */
 .add-to-cart-btn {
-  background-color: #0f1724; /* mesma cor do bg-gray-900 */
-  padding: 7px 16px;        /* controla largura interna */
-  min-width: 50px;           /* largura mínima */
-  min-height: 15px;          /* altura mínima */
+  background-color: #0f1724;
+  /* mesma cor do bg-gray-900 */
+  padding: 7px 16px;
+  /* controla largura interna */
+  min-width: 50px;
+  /* largura mínima */
+  min-height: 15px;
+  /* altura mínima */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;        /* borda arredondada */
+  border-radius: 8px;
+  /* borda arredondada */
   border: none;
   cursor: pointer;
   transition: transform .12s ease, box-shadow .12s ease;
@@ -481,14 +726,15 @@ footer {
 
 /* mantém o ícone no mesmo tamanho (se quiser só aumentar o fundo) */
 .add-to-cart-btn i {
-  font-size: 18px;           /* controla só o ícone */
+  font-size: 18px;
+  /* controla só o ícone */
   line-height: 1;
 }
 
 /* hover opcional */
 .add-to-cart-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
 }
 
 /* opção circular grande */
@@ -500,20 +746,21 @@ footer {
 }
 
 #cart-items p {
-    margin: 2px 0;
+  margin: 2px 0;
 }
 
 #cart-items .remove-from-cart-btn {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .remove-from-cart-btn {
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: black;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: black;
 }
+
 .remove-from-cart-btn:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 
@@ -556,7 +803,7 @@ html,
   -moz-tab-size: 4;
   /* 3 */
   -o-tab-size: 4;
-     tab-size: 4;
+  tab-size: 4;
   /* 3 */
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   /* 4 */
@@ -601,7 +848,7 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 
 abbr:where([title]) {
   -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
+  text-decoration: underline dotted;
 }
 
 /*
@@ -888,7 +1135,8 @@ textarea {
 2. Set the default placeholder color to the user's configured gray 400 color.
 */
 
-input::-moz-placeholder, textarea::-moz-placeholder {
+input::-moz-placeholder,
+textarea::-moz-placeholder {
   opacity: 1;
   /* 1 */
   color: #9ca3af;
@@ -1474,26 +1722,26 @@ video {
 
 .select-none {
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .select-text {
   -webkit-user-select: text;
-     -moz-user-select: text;
-          user-select: text;
+  -moz-user-select: text;
+  user-select: text;
 }
 
 .select-all {
   -webkit-user-select: all;
-     -moz-user-select: all;
-          user-select: all;
+  -moz-user-select: all;
+  user-select: all;
 }
 
 .select-auto {
   -webkit-user-select: auto;
-     -moz-user-select: auto;
-          user-select: auto;
+  -moz-user-select: auto;
+  user-select: auto;
 }
 
 .resize-none {
@@ -1570,64 +1818,64 @@ video {
 
 .appearance-none {
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .appearance-auto {
   -webkit-appearance: auto;
-     -moz-appearance: auto;
-          appearance: auto;
+  -moz-appearance: auto;
+  appearance: auto;
 }
 
 .break-before-auto {
   -moz-column-break-before: auto;
-       break-before: auto;
+  break-before: auto;
 }
 
 .break-before-avoid {
   -moz-column-break-before: avoid;
-       break-before: avoid;
+  break-before: avoid;
 }
 
 .break-before-all {
   -moz-column-break-before: all;
-       break-before: all;
+  break-before: all;
 }
 
 .break-before-avoid-page {
   -moz-column-break-before: avoid;
-       break-before: avoid-page;
+  break-before: avoid-page;
 }
 
 .break-before-page {
   -moz-column-break-before: page;
-       break-before: page;
+  break-before: page;
 }
 
 .break-before-left {
   -moz-column-break-before: left;
-       break-before: left;
+  break-before: left;
 }
 
 .break-before-right {
   -moz-column-break-before: right;
-       break-before: right;
+  break-before: right;
 }
 
 .break-before-column {
   -moz-column-break-before: column;
-       break-before: column;
+  break-before: column;
 }
 
 .break-inside-auto {
   -moz-column-break-inside: auto;
-       break-inside: auto;
+  break-inside: auto;
 }
 
 .break-inside-avoid {
   -moz-column-break-inside: avoid;
-       break-inside: avoid;
+  break-inside: avoid;
 }
 
 .break-inside-avoid-page {
@@ -1636,47 +1884,47 @@ video {
 
 .break-inside-avoid-column {
   -moz-column-break-inside: avoid;
-       break-inside: avoid-column;
+  break-inside: avoid-column;
 }
 
 .break-after-auto {
   -moz-column-break-after: auto;
-       break-after: auto;
+  break-after: auto;
 }
 
 .break-after-avoid {
   -moz-column-break-after: avoid;
-       break-after: avoid;
+  break-after: avoid;
 }
 
 .break-after-all {
   -moz-column-break-after: all;
-       break-after: all;
+  break-after: all;
 }
 
 .break-after-avoid-page {
   -moz-column-break-after: avoid;
-       break-after: avoid-page;
+  break-after: avoid-page;
 }
 
 .break-after-page {
   -moz-column-break-after: page;
-       break-after: page;
+  break-after: page;
 }
 
 .break-after-left {
   -moz-column-break-after: left;
-       break-after: left;
+  break-after: left;
 }
 
 .break-after-right {
   -moz-column-break-after: right;
-       break-after: right;
+  break-after: right;
 }
 
 .break-after-column {
   -moz-column-break-after: column;
-       break-after: column;
+  break-after: column;
 }
 
 .grid-flow-row {
@@ -1895,57 +2143,57 @@ video {
   gap: 1.75rem;
 }
 
-.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+.space-x-2> :not([hidden])~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.space-y-reverse > :not([hidden]) ~ :not([hidden]) {
+.space-y-reverse> :not([hidden])~ :not([hidden]) {
   --tw-space-y-reverse: 1;
 }
 
-.space-x-reverse > :not([hidden]) ~ :not([hidden]) {
+.space-x-reverse> :not([hidden])~ :not([hidden]) {
   --tw-space-x-reverse: 1;
 }
 
-.divide-x > :not([hidden]) ~ :not([hidden]) {
+.divide-x> :not([hidden])~ :not([hidden]) {
   --tw-divide-x-reverse: 0;
   border-right-width: calc(1px * var(--tw-divide-x-reverse));
   border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
 }
 
-.divide-y > :not([hidden]) ~ :not([hidden]) {
+.divide-y> :not([hidden])~ :not([hidden]) {
   --tw-divide-y-reverse: 0;
   border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
   border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
 }
 
-.divide-y-reverse > :not([hidden]) ~ :not([hidden]) {
+.divide-y-reverse> :not([hidden])~ :not([hidden]) {
   --tw-divide-y-reverse: 1;
 }
 
-.divide-x-reverse > :not([hidden]) ~ :not([hidden]) {
+.divide-x-reverse> :not([hidden])~ :not([hidden]) {
   --tw-divide-x-reverse: 1;
 }
 
-.divide-solid > :not([hidden]) ~ :not([hidden]) {
+.divide-solid> :not([hidden])~ :not([hidden]) {
   border-style: solid;
 }
 
-.divide-dashed > :not([hidden]) ~ :not([hidden]) {
+.divide-dashed> :not([hidden])~ :not([hidden]) {
   border-style: dashed;
 }
 
-.divide-dotted > :not([hidden]) ~ :not([hidden]) {
+.divide-dotted> :not([hidden])~ :not([hidden]) {
   border-style: dotted;
 }
 
-.divide-double > :not([hidden]) ~ :not([hidden]) {
+.divide-double> :not([hidden])~ :not([hidden]) {
   border-style: double;
 }
 
-.divide-none > :not([hidden]) ~ :not([hidden]) {
+.divide-none> :not([hidden])~ :not([hidden]) {
   border-style: none;
 }
 
@@ -2137,17 +2385,17 @@ video {
 
 .hyphens-none {
   -webkit-hyphens: none;
-          hyphens: none;
+  hyphens: none;
 }
 
 .hyphens-manual {
   -webkit-hyphens: manual;
-          hyphens: manual;
+  hyphens: manual;
 }
 
 .hyphens-auto {
   -webkit-hyphens: auto;
-          hyphens: auto;
+  hyphens: auto;
 }
 
 .whitespace-normal {
@@ -2410,22 +2658,22 @@ video {
 
 .decoration-slice {
   -webkit-box-decoration-break: slice;
-          box-decoration-break: slice;
+  box-decoration-break: slice;
 }
 
 .decoration-clone {
   -webkit-box-decoration-break: clone;
-          box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .box-decoration-slice {
   -webkit-box-decoration-break: slice;
-          box-decoration-break: slice;
+  box-decoration-break: slice;
 }
 
 .box-decoration-clone {
   -webkit-box-decoration-break: clone;
-          box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .bg-cover {
@@ -2458,7 +2706,7 @@ video {
 
 .bg-clip-text {
   -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
 }
 
 .bg-center {
@@ -2503,27 +2751,27 @@ video {
 
 .object-contain {
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 .object-cover {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .object-fill {
   -o-object-fit: fill;
-     object-fit: fill;
+  object-fit: fill;
 }
 
 .object-none {
   -o-object-fit: none;
-     object-fit: none;
+  object-fit: none;
 }
 
 .object-scale-down {
   -o-object-fit: scale-down;
-     object-fit: scale-down;
+  object-fit: scale-down;
 }
 
 .p-1 {
@@ -3112,7 +3360,7 @@ video {
   contain: var(--tw-contain-size) var(--tw-contain-layout) var(--tw-contain-paint) var(--tw-contain-style);
 }
 
-.content-\[\'this-is-also-valid\]-weirdly-enough\'\ {
+.content-\[\'this-is-also-valid\]-weirdly-enough\'\  {
   --tw-content: 'this-is-also-valid]-weirdly-enough';
   content: var(--tw-content);
 }
@@ -3228,6 +3476,3 @@ video {
     }
   }
 }
-
-
-

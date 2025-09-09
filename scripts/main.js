@@ -21,7 +21,7 @@ const mobileMenu = document.querySelector('.mobile-menu');
 const bars = document.querySelector('.fa-bars');
 const pizzariaCardapio = document.querySelector('.btn-pizzaria');
 
-pizzariaCardapio.addEventListener('click', () => {window.location.href = '../cardapios/pizzaria.html';});
+pizzariaCardapio.addEventListener('click', () => {window.location.href = '../cardapios/pizzaria/pizzariaAdmin.html';});
 
 
 loginicon.addEventListener('click', () => {window.location.href = './login/login.html';});
