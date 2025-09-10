@@ -123,7 +123,7 @@ function removeItemCart(id) {
             //updateCartModal()
             //return
         } else {
-         cart.splice(index, 1)
+            cart.splice(index, 1)
         }
         updateCartModal()
     }
@@ -219,7 +219,7 @@ if (isOpen) {
 /////////////////////////////////////////////////////////////////////////////////
 // PRODUTOS DINÂMICOS
 document.addEventListener("DOMContentLoaded", () => {
-    const produtos = [
+    let produtos = [
         { nome: "Pizza 5 queijos", descricao: "Mussarela, Catupiry, parmesão, Gorgonzola, Provolone.", preco: 19.9, imagem: "../../imagens/Pizza 5 queijos.avif" },
         { nome: "Pizza Peperoni", descricao: "Molho, Mussarela, Peperoni, orégano.", preco: 22.9, imagem: "../../imagens/Pizza de Peperoni.jpg" },
         { nome: "Pizza de Torresmo", descricao: "Molho, Mussarela, Torresmo, azeitona preta, cebola, orégano.", preco: 27.9, imagem: "../../imagens/Pizza de Bacon.avif" },
@@ -232,16 +232,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const container = document.querySelector("#produtos-container")
 
-    produtos.forEach((p, index) => {
-        const card = document.createElement("div")
-        card.classList.add("produto-card", "flex", "gap-3")
-        card.dataset.index = index
-        card.dataset.id = `produto-${index}` // <-- ID único fixo
+    function renderProdutos() {
+        container.innerHTML = "";
 
-        card.innerHTML = `
+        // Renderiza produtos existentes
+        produtos.forEach((p, index) => {
+            const card = document.createElement("div")
+            card.classList.add("produto-card", "flex", "gap-3")
+            card.dataset.index = index
+            card.dataset.id = `produto-${index}` // <-- ID único fixo
+
+            ////////////        MODO EDIÇÃO    ///////////////////
+            if (p.emEdicao) {
+                card.innerHTML = `
+            <div class="upload-preview" data-index="${index}">
+            ${p.imagem ? `<img src="${p.imagem}" alt="${p.nome}" />` : `
+            
+            <div class="add-image-upload">
+                <i class="bi bi-plus-circle"></i>
+                <p>Adicionar imagem</p>
+            </div>
+            
+            `}
+          </div>
+          <input type="file" accept="image/*" class="input-imagem hidden" data-index="${index}">
+          <div class="flex-1">
+            <p class="nome"><input type="text" value="${p.nome || ""}" class="input-text" placeholder="Adicionar nome"></p>
+            <p class="descricao"><textarea class="input-text" placeholder="Adicionar descrição">${p.descricao || ""}</textarea></p>
+            <p class="preco"><input type="number" value="${p.preco || ""}" class="input-text" placeholder="Adicionar Preço"></p>
+
+            <div class="mt-2 flex flex-col gap-2">
+                <button class="btn limpar">Limpar</button>
+                    <div class="flex gap-2">
+                        <button class="btn salvar">Salvar</button>
+                        <button class="btn cancelar">Cancelar</button>
+                        <button class="btn remover hidden">Remover</button>
+                    </div>
+            </div>
+        `;
+                ////////////        MODO NORMAL   ///////////////////
+            } else {
+
+                card.innerHTML = `
       <!-- Caixa de imagem -->
       <div class="upload-preview" data-index="${index}">
-        ${p.imagem ? `<img src="${p.imagem}" alt="${p.nome}" />` : `<span>Adicionar imagem</span>`}
+        ${p.imagem ? `<img src="${p.imagem}" alt="${p.nome}" />` : `
+        
+        <div class="add-image-upload">
+         <i class="bi bi-plus-circle"></i>
+         <p>Adicionar imagem</p>
+        </div>
+        
+        `}
       </div>
       <input type="file" accept="image/*" class="input-imagem hidden" data-index="${index}">
 
@@ -266,19 +308,46 @@ document.addEventListener("DOMContentLoaded", () => {
         <!-- Botões de edição -->
         <div class="mt-2 flex gap-2">
           <button class="btn editar">Editar</button>
+          <button class="btn remover">Remover</button>
           <button class="btn salvar hidden">Salvar</button>
           <button class="btn cancelar hidden">Cancelar</button>
         </div>
       </div>
-    `
-        container.appendChild(card)
-    })
+    `;
+            }
+            container.appendChild(card);
+        });
+
+
+        ///////////////// Adiciona card extra "Adicionar Produto" ///////////////////////////
+        const addCard = document.createElement("div");
+        addCard.classList.add("add-produto-card");
+        addCard.innerHTML = `
+        <div class= "add-produto">
+            <button class="add-produto-btn">
+            <i class="bi bi-plus-square-dotted"></i>
+            <p>Adicionar produto</p>
+            </button>
+            
+        </div>
+        `;
+        addCard.addEventListener("click", () => {
+            produtos.push({
+                nome: "",
+                descricao: "",
+                preco: null,
+                imagem: null,
+                emEdicao: true,
+            });
+            renderProdutos();
+        });
+        container.appendChild(addCard);
+    }
 
     // Delegação de eventos
     document.addEventListener("click", (e) => {
         const card = e.target.closest(".produto-card")
         if (!card) return
-
         const index = card.dataset.index
         const p = produtos[index]
         const nomeEl = card.querySelector(".nome")
@@ -298,32 +367,27 @@ document.addEventListener("DOMContentLoaded", () => {
             if (file) {
                 const imgURL = URL.createObjectURL(file)
                 uploadBox.innerHTML = `<img src="${imgURL}" alt="Preview">`
+                p.imagem = imgURL;
             }
         })
 
         // === EDITAR ===
         if (e.target.classList.contains("editar")) {
+            p.emEdicao = true;
             nomeEl.innerHTML = `<input type="text" value="${p.nome}" class="input-text">`
             descEl.innerHTML = `<textarea class="input-text">${p.descricao}</textarea>`
             precoEl.innerHTML = `<input type="number" value="${p.preco}" class="input-text">`
 
+            // troca botões
             card.querySelector(".editar").classList.add("hidden")
+            card.querySelector(".remover").classList.add("hidden")
             card.querySelector(".salvar").classList.remove("hidden")
             card.querySelector(".cancelar").classList.remove("hidden")
 
-            if (e.target.classList.contains("editar")) {
-                nomeEl.innerHTML = `<input type="text" value="${p.nome}" class="input-text">`
-                descEl.innerHTML = `<textarea class="input-text">${p.descricao}</textarea>`
-                precoEl.innerHTML = `<input type="number" value="${p.preco}" class="input-text">`
+            // aqui sim esconde carrinho e mostra limpar
+            card.querySelector(".add-to-cart-btn").classList.add("hidden")
+            card.querySelector(".limpar").classList.remove("hidden")
 
-                // troca botões
-                card.querySelector(".editar").classList.add("hidden")
-                card.querySelector(".salvar").classList.remove("hidden")
-                card.querySelector(".cancelar").classList.remove("hidden")
-
-                card.querySelector(".add-to-cart-btn").classList.add("hidden")
-                card.querySelector(".limpar").classList.remove("hidden")
-            }
 
         }
 
@@ -334,6 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const novaDesc = card.querySelector(".descricao textarea").value.trim()
             const novoPreco = card.querySelector(".preco input").value.trim()
             const temImagem = uploadBox.querySelector("img") !== null
+
 
             // validação
             if (!novoNome || !novaDesc || !novoPreco || !temImagem) {
@@ -359,13 +424,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // se passou na validação → salva normalmente
-            p.nome = novoNome
-            p.descricao = novaDesc
-            p.preco = parseFloat(novoPreco)
+            p.nome = novoNome;
+            p.descricao = novaDesc;
+            p.preco = parseFloat(novoPreco);
+            p.emEdicao = false;
 
-            nomeEl.textContent = novoNome
-            descEl.textContent = novaDesc
-            precoEl.textContent = `R$ ${p.preco.toFixed(2)}`
+            renderProdutos();
 
             // Atualiza os atributos do botão do carrinho
             addToCartBtn.setAttribute("data-name", p.nome)
@@ -379,25 +443,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // === CANCELAR ===
         if (e.target.classList.contains("cancelar")) {
-            nomeEl.textContent = p.nome || "Adicionar nome"
-            descEl.textContent = p.descricao || "Adicionar descrição"
-            precoEl.textContent = p.preco ? `R$ ${p.preco.toFixed(2)}` : "Adicionar Preço"
-
-            if (p.imagem) {
-                uploadBox.innerHTML = `<img src="${p.imagem}" alt="${p.nome}">`
+            // se o produto é novo e ainda está vazio → remove do array
+            if (!p.nome && !p.descricao && !p.preco && !p.imagem) {
+                // se o produto for novo e vazio → remove
+                produtos.splice(index, 1);
             } else {
-                uploadBox.innerHTML = `<span>Adicionar imagem</span>`
+                // caso contrário apenas sai do modo edição
+                p.emEdicao = false;
             }
 
-            // remove do carrinho também
-            removeItemCart(p.nome)
-
-            card.querySelector(".editar").classList.remove("hidden")
-            card.querySelector(".salvar").classList.add("hidden")
-            card.querySelector(".cancelar").classList.add("hidden")
-            card.querySelector(".add-to-cart-btn").classList.remove("hidden")
-            card.querySelector(".limpar").classList.add("hidden")
+            // caso contrário apenas sai do modo edição
+            renderProdutos();
         }
+
+
         // === LIMPAR ===
         if (e.target.classList.contains("limpar")) {
             // zera os dados do produto no card
@@ -405,9 +464,63 @@ document.addEventListener("DOMContentLoaded", () => {
             descEl.innerHTML = `<textarea class="input-text" placeholder="Adicionar descrição"></textarea>`
             precoEl.innerHTML = `<input type="number" value="" class="input-text" placeholder="Adicionar Preço">`
 
-            uploadBox.innerHTML = `<span>Adicionar imagem</span>`
+            uploadBox.innerHTML = `
+                <div class="add-image-upload">
+                    <i class="bi bi-plus-circle"></i>
+                    <p>Adicionar imagem</p>
+                </div>`
             inputFile.value = "" // limpa o file input também
         }
 
+        // === REMOVER PRODUTO ===
+        if (e.target.classList.contains("remover")) {
+            showConfirm("Deseja realmente remover este produto?", () => {
+                produtos.splice(index, 1);
+                renderProdutos();
+                showToast("Produto removido com sucesso!");
+            });
+        }
+
     })
+
+    // === TOAST ===
+    function showToast(message) {
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => toast.classList.add("show"), 100);
+
+        setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    // === MODAL DE CONFIRMAÇÃO ===
+    function showConfirm(message, onConfirm) {
+        const overlay = document.createElement("div");
+        overlay.className = "modal-overlay";
+
+        overlay.innerHTML = `
+    <div class="modal-box">
+      <h3>${message}</h3>
+      <div class="modal-actions">
+        <button class="modal-btn cancel">Cancelar</button>
+        <button class="modal-btn confirm">Remover</button>
+      </div>
+    </div>
+  `;
+
+        document.body.appendChild(overlay);
+
+        overlay.querySelector(".cancel").addEventListener("click", () => overlay.remove());
+        overlay.querySelector(".confirm").addEventListener("click", () => {
+            overlay.remove();
+            onConfirm();
+        });
+    }
+
+    renderProdutos();
 })
