@@ -219,7 +219,8 @@ if (isOpen) {
 /////////////////////////////////////////////////////////////////////////////////
 // PRODUTOS DINÂMICOS
 document.addEventListener("DOMContentLoaded", () => {
-    let produtos = [
+    // === LISTAS INICIAIS ===
+    let produtosLista = [
         { nome: "Pizza 5 queijos", descricao: "Mussarela, Catupiry, parmesão, Gorgonzola, Provolone.", preco: 19.9, imagem: "../../imagens/Pizza 5 queijos.avif" },
         { nome: "Pizza Peperoni", descricao: "Molho, Mussarela, Peperoni, orégano.", preco: 22.9, imagem: "../../imagens/Pizza de Peperoni.jpg" },
         { nome: "Pizza de Torresmo", descricao: "Molho, Mussarela, Torresmo, azeitona preta, cebola, orégano.", preco: 27.9, imagem: "../../imagens/Pizza de Bacon.avif" },
@@ -228,179 +229,151 @@ document.addEventListener("DOMContentLoaded", () => {
         { nome: "Pizza de Tomate", descricao: "Molho, Mussarela, Tomate, azeitona preta, cebola, alface.", preco: 25.9, imagem: "../../imagens/Pizza Tomate.avif" },
         { nome: "Pizza Cereja", descricao: "Chocolate, Cereja, confeito de Chocolate.", preco: 25.9, imagem: "../../imagens/Pizza Cereja.jpg" },
         { nome: "Pizza Doce", descricao: "Chocolate, Creme de Leite, Morango, confeito de Chocolate.", preco: 29.9, imagem: "../../imagens/Pizza Doce.avif" },
-    ]
+    ];
+    let bebidasLista = [
+        { nome: "Coca-cola", descricao: "350 ml.", preco: 4.99, imagem: "../../imagens/Coca-cola.png" },
+        { nome: "Guaraná Antartica", descricao: "1,5 L.", preco: 11.90, imagem: "../../imagens/Guarana Antartica.png" },
+    ];
 
-    const container = document.querySelector("#produtos-container")
+    // === CONTAINERS ===
+    const produtosContainer = document.querySelector("#produtos");
+    const bebidasContainer = document.querySelector("#bebidas");
 
-    function renderProdutos() {
+    // === FUNÇÃO DE RENDERIZAÇÃO GENÉRICA ===
+    function renderItens(lista, container, tipo) {
         container.innerHTML = "";
 
-        // Renderiza produtos existentes
-        produtos.forEach((p, index) => {
-            const card = document.createElement("div")
-            card.classList.add("produto-card", "flex", "gap-3")
-            card.dataset.index = index
-            card.dataset.id = `produto-${index}` // <-- ID único fixo
+        lista.forEach((item, index) => {
+            const card = document.createElement("div");
+            card.classList.add("produto-card", "flex", "gap-3");
+            card.dataset.index = index;
+            card.dataset.tipo = tipo;
 
-            ////////////        MODO EDIÇÃO    ///////////////////
-            if (p.emEdicao) {
+            if (item.emEdicao) {
                 card.innerHTML = `
-            <div class="upload-preview" data-index="${index}">
-            ${p.imagem ? `<img src="${p.imagem}" alt="${p.nome}" />` : `
-            
-            <div class="add-image-upload">
+          <div class="upload-preview" data-index="${index}">
+            ${item.imagem ? `<img src="${item.imagem}" alt="${item.nome}"  />` : `
+              <div class="add-image-upload">
                 <i class="bi bi-plus-circle"></i>
                 <p>Adicionar imagem</p>
-            </div>
-            
-            `}
+              </div>`}
           </div>
           <input type="file" accept="image/*" class="input-imagem hidden" data-index="${index}">
           <div class="flex-1">
-            <p class="nome"><input type="text" value="${p.nome || ""}" class="input-text" placeholder="Adicionar nome"></p>
-            <p class="descricao"><textarea class="input-text" placeholder="Adicionar descrição">${p.descricao || ""}</textarea></p>
-            <p class="preco"><input type="number" value="${p.preco || ""}" class="input-text" placeholder="Adicionar Preço"></p>
-
+            <p class="nome"><input type="text" value="${item.nome || ""}" class="input-text" placeholder="Adicionar nome"></p>
+            <p class="descricao"><textarea class="input-text" placeholder="Adicionar descrição">${item.descricao || ""}</textarea></p>
+            <p class="preco"><input type="number" value="${item.preco || ""}" class="input-text" placeholder="Adicionar preço"></p>
             <div class="mt-2 flex flex-col gap-2">
-                <button class="btn limpar">Limpar</button>
-                    <div class="flex gap-2">
-                        <button class="btn salvar">Salvar</button>
-                        <button class="btn cancelar">Cancelar</button>
-                        <button class="btn remover hidden">Remover</button>
-                    </div>
+              <button class="btn limpar">Limpar</button>
+              <div class="flex gap-2">
+                <button class="btn salvar">Salvar</button>
+                <button class="btn cancelar">Cancelar</button>
+                <button class="btn remover hidden">Remover</button>
+              </div>
             </div>
+          </div>
         `;
-                ////////////        MODO NORMAL   ///////////////////
             } else {
-
                 card.innerHTML = `
-      <!-- Caixa de imagem -->
-      <div class="upload-preview" data-index="${index}">
-        ${p.imagem ? `<img src="${p.imagem}" alt="${p.nome}" />` : `
-        
-        <div class="add-image-upload">
-         <i class="bi bi-plus-circle"></i>
-         <p>Adicionar imagem</p>
-        </div>
-        
-        `}
-      </div>
-      <input type="file" accept="image/*" class="input-imagem hidden" data-index="${index}">
-
-      <!-- Conteúdo texto -->
-      <div class="flex-1">
-        <p class="nome font-bold">${p.nome}</p>
-        <p class="descricao text-sm">${p.descricao}</p>
-
-        <div class="flex items-center gap-2 justify-between mt-3">
-          <p class="preco font-bold text-lg">R$ ${p.preco.toFixed(2)}</p>
-
-           <button class="bg-gray-900 px-5 rounded add-to-cart-btn" 
-              data-id="produto-${index}" 
-              data-name="${p.nome}" 
-              data-price="${p.preco.toFixed(2)}">
+          <div class="upload-preview" data-index="${index}">
+            ${item.imagem ? `<img src="${item.imagem}" alt="${item.nome}" />` : `
+              <div class="add-image-upload">
+                <i class="bi bi-plus-circle"></i>
+                <p>Adicionar imagem</p>
+              </div>`}
+          </div>
+          <input type="file" accept="image/*" class="input-imagem hidden" data-index="${index}">
+          <div class="flex-1">
+            <p class="nome font-bold">${item.nome}</p>
+            <p class="descricao text-sm">${item.descricao}</p>
+            <div class="flex items-center gap-2 justify-between mt-3">
+              <p class="preco font-bold text-lg">R$ ${item.preco.toFixed(2)}</p>
+              <button class="bg-gray-900 px-5 rounded add-to-cart-btn" 
+                data-id="${tipo}-${index}" 
+                data-name="${item.nome}" 
+                data-price="${item.preco.toFixed(2)}">
                 <i class="fa fa-cart-plus text-lg text-white"></i>
-          </button>
-
-          <button class="btn limpar hidden">Limpar</button>
-        </div>
-
-        <!-- Botões de edição -->
-        <div class="mt-2 flex gap-2">
-          <button class="btn editar">Editar</button>
-          <button class="btn remover">Remover</button>
-          <button class="btn salvar hidden">Salvar</button>
-          <button class="btn cancelar hidden">Cancelar</button>
-        </div>
-      </div>
-    `;
+              </button>
+            </div>
+            <div class="mt-2 flex gap-2">
+              <button class="btn editar">Editar</button>
+              <button class="btn remover" data-id="${tipo}-${index}">Remover</button>
+              <button class="btn salvar hidden">Salvar</button>
+              <button class="btn cancelar hidden">Cancelar</button>
+            </div>
+          </div>
+        `;
             }
+
             container.appendChild(card);
         });
 
-
-        ///////////////// Adiciona card extra "Adicionar Produto" ///////////////////////////
+        // botão "Adicionar"
         const addCard = document.createElement("div");
         addCard.classList.add("add-produto-card");
         addCard.innerHTML = `
-        <div class= "add-produto">
-            <button class="add-produto-btn">
-            <i class="bi bi-plus-square-dotted"></i>
-            <p>Adicionar produto</p>
-            </button>
-            
-        </div>
-        `;
+      <div class="add-produto">
+        <button class="add-produto-btn">
+          <i class="bi bi-plus-square-dotted"></i>
+          <p>Adicionar ${tipo}</p>
+        </button>
+      </div>
+    `;
         addCard.addEventListener("click", () => {
-            produtos.push({
-                nome: "",
-                descricao: "",
-                preco: null,
-                imagem: null,
-                emEdicao: true,
-            });
-            renderProdutos();
+            lista.push({ nome: "", descricao: "", preco: null, imagem: null, emEdicao: true, novo: true });
+            renderTodos();
         });
         container.appendChild(addCard);
     }
 
-    // Delegação de eventos
+    // === RENDERIZAR TODOS ===
+    function renderTodos() {
+        renderItens(produtosLista, produtosContainer, "produto");
+        renderItens(bebidasLista, bebidasContainer, "bebida");
+    }
+    renderTodos();
+
+    // === EVENTOS ===
     document.addEventListener("click", (e) => {
-        const card = e.target.closest(".produto-card")
-        if (!card) return
-        const index = card.dataset.index
-        const p = produtos[index]
-        const nomeEl = card.querySelector(".nome")
-        const descEl = card.querySelector(".descricao")
-        const precoEl = card.querySelector(".preco")
-        const uploadBox = card.querySelector(".upload-preview")
-        const inputFile = card.querySelector(".input-imagem")
+        const card = e.target.closest(".produto-card");
+        if (!card) return;
 
-        // === CLICK NA IMAGEM ===
+        const index = card.dataset.index;
+        const tipo = card.dataset.tipo;
+        const lista = tipo === "produto" ? produtosLista : bebidasLista;
+        const item = lista[index];
+
+        const uploadBox = card.querySelector(".upload-preview");
+        const inputFile = card.querySelector(".input-imagem");
+
+        // upload imagem
         if (e.target.closest(".upload-preview")) {
-            inputFile.click()
+            inputFile.click();
         }
-
-        // === UPLOAD IMAGEM ===
         inputFile.addEventListener("change", () => {
-            const file = inputFile.files[0]
+            const file = inputFile.files[0];
             if (file) {
-                const imgURL = URL.createObjectURL(file)
-                uploadBox.innerHTML = `<img src="${imgURL}" alt="Preview">`
-                p.imagem = imgURL;
+                const imgURL = URL.createObjectURL(file);
+                uploadBox.innerHTML = `<img src="${imgURL}" alt="Preview">`;
+                item.imagem = imgURL;
             }
-        })
+        });
 
-        // === EDITAR ===
+        // editar
         if (e.target.classList.contains("editar")) {
-            p.emEdicao = true;
-            nomeEl.innerHTML = `<input type="text" value="${p.nome}" class="input-text">`
-            descEl.innerHTML = `<textarea class="input-text">${p.descricao}</textarea>`
-            precoEl.innerHTML = `<input type="number" value="${p.preco}" class="input-text">`
-
-            // troca botões
-            card.querySelector(".editar").classList.add("hidden")
-            card.querySelector(".remover").classList.add("hidden")
-            card.querySelector(".salvar").classList.remove("hidden")
-            card.querySelector(".cancelar").classList.remove("hidden")
-
-            // aqui sim esconde carrinho e mostra limpar
-            card.querySelector(".add-to-cart-btn").classList.add("hidden")
-            card.querySelector(".limpar").classList.remove("hidden")
-
-
+            // salva os valores originais em backup
+            item._backup = { ...item };
+            item.emEdicao = true;
+            renderTodos();
         }
 
-        // === SALVAR ===
+        // salvar
         if (e.target.classList.contains("salvar")) {
-            const addToCartBtn = card.querySelector(".add-to-cart-btn")
-            const novoNome = card.querySelector(".nome input").value.trim()
-            const novaDesc = card.querySelector(".descricao textarea").value.trim()
-            const novoPreco = card.querySelector(".preco input").value.trim()
-            const temImagem = uploadBox.querySelector("img") !== null
+            const novoNome = card.querySelector(".nome input").value.trim();
+            const novaDesc = card.querySelector(".descricao textarea").value.trim();
+            const novoPreco = card.querySelector(".preco input").value.trim();
+            const temImagem = uploadBox.querySelector("img") !== null;
 
-
-            // validação
             if (!novoNome || !novaDesc || !novoPreco || !temImagem) {
                 Toastify({
                     text: "Por favor, preencha todos os campos",
@@ -420,68 +393,76 @@ document.addEventListener("DOMContentLoaded", () => {
                         boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
                     },
                 }).showToast()
-                return // impede salvar
+                return;
             }
 
-            // se passou na validação → salva normalmente
-            p.nome = novoNome;
-            p.descricao = novaDesc;
-            p.preco = parseFloat(novoPreco);
-            p.emEdicao = false;
+            // aplica as alterações no objeto
+            item.nome = novoNome;
+            item.descricao = novaDesc;
+            item.preco = parseFloat(novoPreco);
+            item.emEdicao = false;
 
-            renderProdutos();
+            // 🔑 remove a flag "novo" ao salvar pela primeira vez
+            if (item.novo) delete item.novo;
+            if (item._backup) delete item._backup; // apaga backup após salvar
 
-            // Atualiza os atributos do botão do carrinho
-            addToCartBtn.setAttribute("data-name", p.nome)
-            addToCartBtn.setAttribute("data-price", p.preco.toFixed(2))
-            card.querySelector(".editar").classList.remove("hidden")
-            card.querySelector(".salvar").classList.add("hidden")
-            card.querySelector(".cancelar").classList.add("hidden")
-            card.querySelector(".add-to-cart-btn").classList.remove("hidden")
-            card.querySelector(".limpar").classList.add("hidden")
+            renderTodos();
+            showToast(`${tipo === "produto" ? "Produto" : "Bebida"} salvo com sucesso!`);
         }
 
-        // === CANCELAR ===
+        // cancelar
         if (e.target.classList.contains("cancelar")) {
-            // se o produto é novo e ainda está vazio → remove do array
-            if (!p.nome && !p.descricao && !p.preco && !p.imagem) {
-                // se o produto for novo e vazio → remove
-                produtos.splice(index, 1);
+            if (item.novo) {
+                // se for um item recém-criado e não salvo, remove apenas ele
+                lista.splice(index, 1);
+                showToast(`${tipo === "produto" ? "Produto" : "Bebida"} não salvo foi removido`);
             } else {
-                // caso contrário apenas sai do modo edição
-                p.emEdicao = false;
+                // se já existia antes, apenas restaura o backup
+                if (item._backup) {
+                    Object.assign(item, item._backup);
+                    delete item._backup;
+                }
+                item.emEdicao = false;
+                showToast("Edição cancelada");
             }
 
-            // caso contrário apenas sai do modo edição
-            renderProdutos();
+            renderTodos();
         }
 
-
-        // === LIMPAR ===
+        // limpar
         if (e.target.classList.contains("limpar")) {
-            // zera os dados do produto no card
-            nomeEl.innerHTML = `<input type="text" value="" class="input-text" placeholder="Adicionar nome">`
-            descEl.innerHTML = `<textarea class="input-text" placeholder="Adicionar descrição"></textarea>`
-            precoEl.innerHTML = `<input type="number" value="" class="input-text" placeholder="Adicionar Preço">`
-
+            card.querySelector(".nome input").value = "";
+            card.querySelector(".descricao textarea").value = "";
+            card.querySelector(".preco input").value = "";
             uploadBox.innerHTML = `
-                <div class="add-image-upload">
-                    <i class="bi bi-plus-circle"></i>
-                    <p>Adicionar imagem</p>
-                </div>`
-            inputFile.value = "" // limpa o file input também
+            <div class="add-image-upload">
+                <i class="bi bi-plus-circle"></i>
+                <p>Adicionar imagem</p>
+            </div>
+            `;
+            showToast("Campos limpos");
         }
 
-        // === REMOVER PRODUTO ===
+        // remover
         if (e.target.classList.contains("remover")) {
-            showConfirm("Deseja realmente remover este produto?", () => {
-                produtos.splice(index, 1);
-                renderProdutos();
-                showToast("Produto removido com sucesso!");
+            const id = e.target.getAttribute("data-id"); // Obtém o ID do produto
+            showConfirm(`Deseja remover este ${tipo}?`, () => {
+                // Remover do carrinho
+                const itemIndexInCart = cart.findIndex(item => item.id === id);
+                if (itemIndexInCart !== -1) {
+                    cart.splice(itemIndexInCart, 1);
+                    updateCartModal(); // Atualiza o modal do carrinho
+                }
+
+                // Remover do grid (lista de produtos/bebidas)
+                lista.splice(index, 1);
+                renderTodos();
+                showToast(`${tipo === "produto" ? "Produto" : "Bebida"} removido!`);
             });
         }
 
-    })
+
+    });
 
     // === TOAST ===
     function showToast(message) {
@@ -504,14 +485,14 @@ document.addEventListener("DOMContentLoaded", () => {
         overlay.className = "modal-overlay";
 
         overlay.innerHTML = `
-    <div class="modal-box">
-      <h3>${message}</h3>
-      <div class="modal-actions">
-        <button class="modal-btn cancel">Cancelar</button>
-        <button class="modal-btn confirm">Remover</button>
+      <div class="modal-box">
+        <h3>${message}</h3>
+        <div class="modal-actions">
+          <button class="modal-btn cancel">Cancelar</button>
+          <button class="modal-btn confirm">Remover</button>
+        </div>
       </div>
-    </div>
-  `;
+    `;
 
         document.body.appendChild(overlay);
 
@@ -521,6 +502,4 @@ document.addEventListener("DOMContentLoaded", () => {
             onConfirm();
         });
     }
-
-    renderProdutos();
-})
+});

@@ -358,6 +358,7 @@ footer {
   border: 1px solid var(--cinza);
   border-radius: 6px;
   padding: 0.5rem;
+  gap: 1rem;
 }
 
 /* Área de texto / inputs ao lado da imagem */
@@ -472,6 +473,7 @@ footer {
   border-radius: 6px;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
 /* Caixa de imagem */
@@ -484,7 +486,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  /*overflow: hidden;       evita imagem "estourar" */
+  overflow: hidden;      
 }
 
 /* Imagem dentro */
@@ -494,7 +496,9 @@ footer {
   object-fit: cover;     /* corta a imagem sem distorcer */
   border-radius: 8px;
   transition-duration: 300ms;
+   
 }
+
 
 .upload-preview img:hover {
   --tw-scale-x: 1.1;
