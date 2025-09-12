@@ -136,13 +136,13 @@ img {
 
 header {
     max-width: 100%;
-    background-color: #f7e7be;
+   /* background-color: #f7e7be;*/
     text-align: center;
 }
     
 
 .navbar {
-    min-height: 14vh;
+    min-height: 12vh;
 }
 
 

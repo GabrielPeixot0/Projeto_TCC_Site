@@ -24,238 +24,193 @@
     <!-- Parte do HEARDER -->
     <header>
         <nav class="navbar flex between wrapper">
-            <a href="#" class="logo">SeuCardápio.</a>
-
-            <!-- DESKTOP MENU -->
-
-            <ul class="navlist flex gap-5 wrapper">
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">Sobre</a>
-                </li>
-                <li>
-                    <a href="#">Layouts</a>
-                </li>
-            </ul>
-
-            <!-- 
-            <div class="desktop-action flex gap-2">
-                <a href="#" class="login-icon">
-                    <i class="fa-solid fa-user"></i>
-                </a>
-
-                    
-                <a href="#" class="menu">
+            <div class="header-left flex gap-2">
+                <!-- Botão Menu -->
+                <button class="icon-btn">
                     <i class="fa-solid fa-bars"></i>
-                </a>
-                
-                
-            </div>
-        -->
+                </button>
 
-            <!-- MOBILE MENU -->
-            <ul class="mobile-menu">
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">Sobre nós</a>
-                </li>
-                <li>
-                    <a href="#">Layouts</a>
-                </li>
-                <li>
-                    <a href="#">Contatos</a>
-                </li>
-                <a href="#" class="btn">
-                    Cadastrar
-                    &nbsp;
-                    <i class="fa-solid fa-right-to-bracket"></i>
-                </a>
-            </ul>
-
-        </nav>
-    </header>
-
-    <!-- Parte do Conteudo -->
-    <main>
-
-        <!-- Banner -->
-        <section>
-            <div class="banner">
-                <div class="w-full h-[420px] bg-home bg-cover bg-center">
-                    <div class="w-full h-full flex flex-col justify-center items-center bg-black bg-opacity-50">
-                        <img src="../../imagens/Logo.jpeg" alt="Logo da Pizza"
-                            class="w-32 h-32 rounded-full shadow-lg hover:scale-110 duration-200" />
-                        <h1 class="text-4xl font-bold text-white">
-                            Pizzaria Recanto
-                        </h1>
-
-                        <span class="text-white font-medium">Rua dev 12, Sao Paulo - SP</span>
-
-                        <div class="bg-green-600 px-4 py-1 rounded-lg mt-5" id="date-span">
-                            <span class="text-white font-medium">Seg á Dom - 18:00 as 23:00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!--INICIO DO MENU-->
-        <section>
-            <h2 class="text-2xl md:text-3xl font-blond text-center mt-9 mb-6">
-                Conheça nosso menu
-            </h2>
-
-            <div class="menu wrapper p-top-min" id="menu">
-                <div id="produtos"
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16">
-                    <!-- Os produtos são carregados -->
-                </div>
-            </div>
-        </section>
-        <!--FIM DO MENU-->
-
-
-        <!--  BEBIDAS  -->
-        <section>
-            <div class="mx-auto max-w-7xl px-2 my-2 ">
-                <h2 class="front-blond text-3xl">Bebidas</h2>
+                <!-- Logo -->
+                <a href="#" class="logo">SeuCardápio.</a>
             </div>
 
-            <div class="bebidas wrapper p-top-min">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16"
-                    id="bebidas">
-                    <!-- bebidas vão ser carregadas pelo JS -->
-                </div>
-            </div>
-        </section>
+            <!-- Centro limpo -->
+            <div class="header-center"></div>
 
-        <!--MODAL CART-->
-        <section>
-            <div class="modal-cart wrapper">
-                <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden"
-                    id="cart-modal">
+            <!-- Ícones lado direito -->
+            <div class="header-right flex gap-3">
+                <button class="icon-btn">
+                    <i class="fa-solid fa-eye-slash"></i>
+                    <span class="text-header">Visualizar</span>
+                </button>
 
-                    <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
-                        <h2 class="text-center font-bold text-2xl mb-2">Meu carrinho</h2>
+                <button class="icon-btn">
+                    <i class="fa-solid fa-headset"></i>
+                    <span class="text-header">Suporte</span>
+                </button>
 
-                        <!-- Itens do carrinho -->
-                        <div id="cart-items" class="mb-4"></div>
-
-                        <!-- Total -->
-                        <p class="texto font-bold">Total: <span id="cart-total">0.00</span></p>
-
-                        <!-- Endereço -->
-                        <p class="texto font-bold mt-4">endereco de entrega:</p>
-                        <input type="text" placeholder="Digite seu endereco completo..." id="address"
-                            class="w-full border-2 p-1 rounded my-1" />
-
-                        <p class="text-red-500 hidden" id="address-warn">Digite seu endereco completo!</p>
-                        <p class="text-red-500 hidden" id="address-warn-cart-empty">Adicione itens para finalizar sua
-                            compra!</p>
-
-                        <div class="flex items-center justify-between mt-5 w-full">
-                            <button id="close-modal-btn" class="bg-red-600 text-white px-4 py-1 rounded">Fechar</button>
-                            <button id="checkout-btn" class="bg-green-500 text-white px-4 py-1 rounded">Finalizar
-                                pedido</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!--CART-->
-        <section>
-            <div class="cart sticky wrapper bottom-0">
-                <div class="bg-red-500 py-3 flex items-center justify-center rounded-lg px-6">
-                    <button class="flex items-center gap-2 text-white font-bold" id="cart-btn">
-                        (<span id="cart-count">0</span>)
-                        Veja meu carrinho
-                        <i class="fa fa=cart-plus text-lg text-white"></i>
+                <div class="user-wrap flex gap-2">
+                    <button class="icon-btn">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="text-header">Pizzaria Recanto</span>
+                        <i class="fa-solid fa-chevron-down"></i>
                     </button>
                 </div>
             </div>
-        </section>
+        </nav>
+    </header>
 
-    </main>
+    <!-- Barra de Edição Lateral -->
+    <aside class="left-sidebar" role="navigation" aria-label="Barra lateral de ações">
 
-    <!-- Parte do FOOTER -->
-    <footer>
-        <div class="footer-conteiner">
-            <div class="flex wrapper gap-3">
-                <div class="footer-wrapper">
-                    <a href="#" class="logo">SeuCardápio.</a>
-                    <p1 class="mt-one-half">
-                        Atraia mais clientes e destaque-se<br>
-                        no mercado, faça SeuCardápio.
-                    </p1>
-                    <div class="flex gap-2 mt-one-half">
-                        <a href="#" class="social-icon">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fa-brands fa-x-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fa-brands fa-facebook-f"></i>
-                        </a>
+        <button class="side-btn" title="Aparência" aria-label="Aparência">
+            <i class="fa-solid fa-palette"></i>
+        </button>
+
+        <button class="side-btn" title="Categorias" aria-label="Categorias">
+            <i class="fa-solid fa-file-circle-plus"></i>
+        </button>
+
+        <button class="side-btn" title="Configurações" aria-label="Configurações">
+            <i class="fa-solid fa-gear"></i>
+        </button>
+
+    </aside>
+
+    <!-- Parte do Conteudo -->
+    <main>
+        <div class="page-card">
+
+            <!-- Banner -->
+            <section>
+                <div id="banner" class="banner">
+                    <div id="bannerBackground" class="w-full h-[420px] bg-home bg-cover bg-center relative">
+                        <div class="w-full h-full flex flex-col justify-center items-center bg-black bg-opacity-50">
+                            <img id="logoImg" src="../../imagens/Logo.jpeg" alt="Logo da Pizza"
+                                class="w-32 h-32 rounded-full shadow-lg hover:scale-110 duration-200" />
+
+                            <p id="restaurantName" class="name-restaurant">
+                                Pizzaria Recanto
+                            </p>
+
+                            <span id="address" class="endereco-restaurant">Rua dev 12, Sao Paulo - SP</span>
+
+                            <div class="bg-green-600 px-4 py-1 rounded-lg mt-5" id="date-span">
+                                <span class="text-white font-medium">Seg á Dom - 18:00 as 23:00</span>
+                            </div>
+                        </div>
+
+                        <div id="editModeButtons" class="actions edit-mode-buttons hidden">
+                            <button id="salvarBtn" class="btn salvar">Salvar</button>
+                            <button id="cancelarBtn" class="btn cancelar">Cancelar</button>
+                            <button id="opcoesBtn" class="btn opcoes"> Opções
+                                <i class="fa-solid fa-angle-down"></i>
+                            </button>
+                        </div>
+
+                        <!-- Mini barra de opções -->
+                        <div id="optionsMenu" class="options-menu hidden">
+                            <button id="trocarLogoBtn" class="btn">Trocar logo</button>
+                            <button id="trocarFundoBtn" class="btn">Trocar fundo</button>
+                            <label class="slider-label">Opacidade de fundo
+                                <input type="range" id="opacityRange" min="0" max="100" value="50">
+                            </label>
+                            <button id="corFundoBtn" class="btn">Cor de fundo</button>
+                            <button id="limparMenuBtn" class="btn">Limpar</button>
+                        </div>
+
+
+                        <div id="defaultButtons" class="actions">
+                            <button id="editarBtn" class="btn editar">Editar</button>
+                            <button id="removerBtn" class="btn remover">Remover</button>
+                        </div>
 
                     </div>
                 </div>
+            </section>
 
-                <ul class="footer-wrapper">
-                    <li>
-                        <h4>Serviços</h4>
-                    </li>
-                    <li class="mt-one-half">
-                        <a href="#" class="footer-link"> Layouts</a>
-                    </li>
-                    <li class="mt-one-half">
-                        <a href="#" class="footer-link"> Destaques</a>
-                    </li>
-                    <li class="mt-one-half">
-                        <a href="#" class="footer-link"> Categorias</a>
-                    </li>
-                </ul>
+            <!--INICIO DO MENU-->
+            <section>
+                <h2 class="text-2xl md:text-3xl font-blond text-center mt-9 mb-6">
+                    Conheça nosso menu
+                </h2>
 
-                <ul class="footer-wrapper">
-                    <li>
-                        <h4>Empresa</h4>
-                    </li>
-                    <li class="mt-one-half">
-                        <a href="#" class="footer-link"> Sobre nós</a>
-                    </li>
-                    <li class="mt-one-half">
-                        <a href="#" class="footer-link"> Avisos legais<br>e privacidade</a>
-                    </li>
-                    <li class="mt-one-half">
-                        <a href="#" class="footer-link"> FAQ's</a>
-                    </li>
-                </ul>
+                <div class="menu wrapper p-top-min" id="menu">
+                    <div id="produtos"
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16">
+                        <!-- Os produtos são carregados -->
+                    </div>
+                </div>
+            </section>
+            <!--FIM DO MENU-->
 
-                <ul class="footer-wrapper">
-                    <li>
-                        <h4>Suporte</h4>
-                    </li>
-                    <li class="mt-one-half">
-                        <a href="#" class="footer-link"> Contatos</a>
-                    </li>
-                    <li class="mt-one-half">
-                        <a href="#" class="footer-link"> Feedback</a>
-                    </li>
-                    <li class="mt-one-half">
-                        <a href="#" class="footer-link"> Login</a>
-                    </li>
-                </ul>
 
-            </div>
+            <!--  BEBIDAS  -->
+            <section>
+                <div class="mx-auto max-w-7xl px-2 my-2 ">
+                    <h2 class="front-blond text-3xl">Bebidas</h2>
+                </div>
+
+                <div class="bebidas wrapper p-top-min">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16"
+                        id="bebidas">
+                        <!-- bebidas vão ser carregadas pelo JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!--MODAL CART-->
+            <section>
+                <div class="modal-cart wrapper">
+                    <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden"
+                        id="cart-modal">
+
+                        <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
+                            <h2 class="text-center font-bold text-2xl mb-2">Meu carrinho</h2>
+
+                            <!-- Itens do carrinho -->
+                            <div id="cart-items" class="mb-4"></div>
+
+                            <!-- Total -->
+                            <p class="texto font-bold">Total: <span id="cart-total">0.00</span></p>
+
+                            <!-- Endereço -->
+                            <p class="texto font-bold mt-4">endereco de entrega:</p>
+                            <input type="text" placeholder="Digite seu endereco completo..." id="address"
+                                class="w-full border-2 p-1 rounded my-1" />
+
+                            <p class="text-red-500 hidden" id="address-warn">Digite seu endereco completo!</p>
+                            <p class="text-red-500 hidden" id="address-warn-cart-empty">Adicione itens para finalizar
+                                sua
+                                compra!</p>
+
+                            <div class="flex items-center justify-between mt-5 w-full">
+                                <button id="close-modal-btn"
+                                    class="bg-red-600 text-white px-4 py-1 rounded">Fechar</button>
+                                <button id="checkout-btn" class="bg-green-500 text-white px-4 py-1 rounded">Finalizar
+                                    pedido</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!--CART-->
+            <section>
+                <div class="cart sticky wrapper bottom-0">
+                    <div class="bg-red-500 py-3 flex items-center justify-center rounded-lg px-6">
+                        <button class="flex items-center gap-2 text-white font-bold" id="cart-btn">
+                            (<span id="cart-count">0</span>)
+                            Veja meu carrinho
+                            <i class="fa fa-cart-plus text-lg text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
 
         </div>
-    </footer>
+    </main>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="../../scripts/pizzaria/pizzaria.js"></script>

@@ -1,4 +1,4 @@
-const menu = document.getElementById("menu")
+const menuContainer = document.getElementById("menu")
 const cartBtn = document.getElementById("cart-btn")
 const cartModal = document.getElementById("cart-modal")
 const cartItemsConteiner = document.getElementById("cart-items")
@@ -12,6 +12,56 @@ const addressWarnEmptyCart = document.getElementById("address-warn-cart-empty")
 const bebidas = document.getElementById("bebidas")
 
 let cart = []
+
+
+/////////////////////////////////////////////////////////////////////////////////
+// INTERAÇÃO DO ZOOM NA TELA
+let scale = 1;
+const main = document.querySelector("main");
+
+// Intercepta scroll com Ctrl (zoom do navegador)
+document.addEventListener("wheel", function (e) {
+    if (e.ctrlKey) {
+        e.preventDefault(); // impede zoom do navegador
+
+        if (e.deltaY < 0) {
+            scale += 0.1; // zoom in
+        } else {
+            scale -= 0.1; // zoom out
+        }
+
+        scale = Math.min(Math.max(0.5, scale), 2); // limite de 50% a 200%
+        main.style.transform = `scale(${scale})`;
+        main.style.transformOrigin = "top center";
+    }
+}, { passive: false });
+
+// Intercepta Ctrl + e Ctrl -
+document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey && (e.key === "+" || e.key === "=")) {
+        e.preventDefault();
+        scale = Math.min(scale + 0.1, 2);
+        main.style.transform = `scale(${scale})`;
+        main.style.transformOrigin = "top center";
+    }
+
+    if (e.ctrlKey && e.key === "-") {
+        e.preventDefault();
+        scale = Math.max(scale - 0.1, 0.5);
+        main.style.transform = `scale(${scale})`;
+        main.style.transformOrigin = "top center";
+    }
+
+    if (e.ctrlKey && e.key === "0") {
+        e.preventDefault();
+        scale = 1; // reset
+        main.style.transform = `scale(${scale})`;
+        main.style.transformOrigin = "top center";
+    }
+});
+
+
+
 
 /////////////////////////////////////////////////////////////////////////////////
 // abir o modal do carrinho
@@ -32,25 +82,27 @@ closeModalBtn.addEventListener("click", function () {
     cartModal.style.display = "none"
 })
 
-menu.addEventListener("click", function (event) {
-    let parentButton = event.target.closest(".add-to-cart-btn")
-    if (parentButton) {
-        const id = parentButton.getAttribute("data-id")
-        const name = parentButton.getAttribute("data-name")
-        const price = parseFloat(parentButton.getAttribute("data-price"))
-        addToCart(id, name, price)
-    }
-})
+if (menuContainer) {
+    menuContainer.addEventListener("click", function (event) {
+        let parentButton = event.target.closest(".add-to-cart-btn")
+        if (parentButton) {
+            const id = parentButton.getAttribute("data-id")
+            const name = parentButton.getAttribute("data-name")
+            const price = parseFloat(parentButton.getAttribute("data-price"))
+            addToCart(id, name, price)
+        }
+    })
 
-bebidas.addEventListener("click", function (event) {
-    let parentButton = event.target.closest(".add-to-cart-btn")
-    if (parentButton) {
-        const id = parentButton.getAttribute("data-id")
-        const name = parentButton.getAttribute("data-name")
-        const price = parseFloat(parentButton.getAttribute("data-price"))
-        addToCart(id, name, price)
-    }
-})
+    bebidas.addEventListener("click", function (event) {
+        let parentButton = event.target.closest(".add-to-cart-btn")
+        if (parentButton) {
+            const id = parentButton.getAttribute("data-id")
+            const name = parentButton.getAttribute("data-name")
+            const price = parseFloat(parentButton.getAttribute("data-price"))
+            addToCart(id, name, price)
+        }
+    })
+}
 
 // função para adicionar item ao carrinho
 function addToCart(id, name, price) {
@@ -208,6 +260,7 @@ function checkrestauranteopen() {
 
 const spanItem = document.getElementById("date-span")
 const isOpen = checkrestauranteopen()
+
 if (isOpen) {
     spanItem.classList.remove("bg-red-500")
     spanItem.classList.add("bg-green-600")
@@ -217,7 +270,8 @@ if (isOpen) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////
-// PRODUTOS DINÂMICOS
+///////////////          PRODUTOS DINÂMICOS       ///////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", () => {
     // === LISTAS INICIAIS ===
     let produtosLista = [
@@ -502,4 +556,285 @@ document.addEventListener("DOMContentLoaded", () => {
             onConfirm();
         });
     }
+});
+
+/////////////////////////////////////////////////////////////////////////////////
+///////////////          BANNER          ///////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Referências aos elementos do HTML
+    const bannerBackground = document.getElementById("bannerBackground");
+    const logoImg = document.getElementById("logoImg");
+    const restaurantName = document.getElementById("restaurantName");
+    const address = document.getElementById("address");
+
+    const defaultButtons = document.getElementById("defaultButtons");
+    const editModeButtons = document.getElementById("editModeButtons");
+    const editarBtn = document.getElementById("editarBtn");
+    const salvarBtn = document.getElementById("salvarBtn");
+    const cancelarBtn = document.getElementById("cancelarBtn");
+
+
+    const opcoesBtn = document.getElementById("opcoesBtn");
+    const optionsMenu = document.getElementById("optionsMenu");
+    const trocarLogoBtn = document.getElementById("trocarLogoBtn");
+    const trocarFundoBtn = document.getElementById("trocarFundoBtn");
+    const opacityRange = document.getElementById("opacityRange");
+    const corFundoBtn = document.getElementById("corFundoBtn");
+    const limparMenuBtn = document.getElementById("limparMenuBtn");
+
+
+    let originalData = {
+        name: restaurantName.textContent.trim(),
+        address: address.textContent.trim(),
+        backgroundImg: window.getComputedStyle(bannerBackground).backgroundImage,
+        logoSrc: logoImg.src,
+    };
+
+    let editing = false;
+
+    //  Modo de edição
+    function renderEditMode() {
+        if (editing) {
+            // Esconde botões padrão e mostra os de edição
+            defaultButtons.classList.add("hidden");
+            editModeButtons.classList.remove("hidden");
+
+            // Transforma texto em inputs
+            restaurantName.innerHTML = `<input type="text" class="editable-input" value="${restaurantName.textContent.trim()}">`;
+            address.innerHTML = `<input type="text" class="editable-input" value="${address.textContent.trim()}">`;
+
+            // Adiciona classe de cursor para indicar que a imagem é clicável
+            bannerBackground.classList.add("cursor-pointer");
+            logoImg.classList.add("cursor-pointer");
+
+        } else {
+            // Esconde botões de edição e mostra os padrão
+            defaultButtons.classList.remove("hidden");
+            editModeButtons.classList.add("hidden");
+
+            // Reverte para elementos de texto
+            restaurantName.innerHTML = originalData.name;
+            address.innerHTML = originalData.address;
+
+            // Remove classe de cursor
+            bannerBackground.classList.remove("cursor-pointer");
+            logoImg.classList.remove("cursor-pointer");
+        }
+    }
+
+    // --- EVENT LISTENERS ---
+
+    // Abrir/fechar menu de opções + troca de ícone
+    opcoesBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        optionsMenu.classList.toggle("hidden");
+
+        const icon = opcoesBtn.querySelector("i");
+        if (optionsMenu.classList.contains("hidden")) {
+            icon.className = "fa-solid fa-angle-down"; // fechado
+        } else {
+            icon.className = "fa-solid fa-angle-up"; // aberto
+        }
+    });
+
+    // Trocar logo
+    trocarLogoBtn.addEventListener("click", () => {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*";
+        input.onchange = (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    logoImg.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+        input.click();
+    });
+
+    // Trocar fundo
+    trocarFundoBtn.addEventListener("click", () => {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*";
+        input.onchange = (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    bannerBackground.style.backgroundImage = `url(${e.target.result})`;
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+        input.click();
+    });
+
+    // Opacidade de fundo
+    opacityRange.addEventListener("input", () => {
+        const value = opacityRange.value / 100;
+        bannerBackground.style.backgroundColor = `rgba(0,0,0,${1 - value})`;
+    });
+
+    // Cor de fundo
+    corFundoBtn.addEventListener("click", () => {
+        const input = document.createElement("input");
+        input.type = "color";
+        input.onchange = (event) => {
+            bannerBackground.style.backgroundColor = event.target.value;
+        };
+        input.click();
+    });
+
+    // Limpar (menu)
+    limparMenuBtn.addEventListener("click", () => {
+        bannerBackground.style.backgroundImage = "none";
+        logoImg.src = "";
+    });
+
+
+
+    // "Editar"
+    editarBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // <-- impede que o clique vá parar em outro elemento
+        editing = true;
+        originalData = {
+            name: restaurantName.textContent.trim(),
+            address: address.textContent.trim(),
+            backgroundImg: window.getComputedStyle(bannerBackground).backgroundImage,
+            logoSrc: logoImg.src,
+        };
+        renderEditMode();
+    });
+
+    // "Salvar"
+    salvarBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const newName = restaurantName.querySelector("input").value;
+        const newAddress = address.querySelector("input").value;
+
+        if (newName.trim() === "" || newAddress.trim() === "") {
+            Toastify({
+                text: "Por favor, preencha todos os campos",
+                duration: 6000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                stopOnFocus: true,
+                style: {
+                    background: "var(--vermelho-claro)",
+                    padding: "16px 32px",
+                    borderRadius: "8px",
+                    fontSize: "18px",
+                    textAlign: "center",
+                    width: "auto",
+                    maxWidth: "400px",
+                    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                },
+            }).showToast()
+            return;
+        }
+
+        // Atualiza os dados originais
+        originalData.name = newName;
+        originalData.address = newAddress;
+
+        // Finaliza o modo de edição
+        editing = false;
+        renderEditMode();
+        showToast("Dados do banner salvos com sucesso!");
+    });
+
+    //"Cancelar"
+    cancelarBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        // Reverte para os dados originais do backup
+        restaurantName.innerHTML = originalData.name;
+        address.innerHTML = originalData.address;
+
+        // Reverte as imagens
+        bannerBackground.style.backgroundImage = originalData.backgroundImg;
+        logoImg.src = originalData.logoSrc;
+
+        // Finaliza o modo de edição
+        editing = false;
+        renderEditMode();
+        showToast("Edição cancelada.");
+    });
+
+    // "Limpar"
+    limparBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!editing) return;
+
+        // Limpa os campos de input e as imagens
+        restaurantName.querySelector("input").value = "";
+        address.querySelector("input").value = "";
+        bannerBackground.style.backgroundImage = "none";
+        logoImg.src = "";
+
+        showToast("Campos limpos.");
+    });
+
+    //  Upload de fundo
+    bannerBackground.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!editing) return; // <-- Adicionado: Interrompe se não estiver em modo de edição
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*";
+        input.onchange = (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    bannerBackground.style.backgroundImage = `url(${e.target.result})`;
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+        input.click();
+    });
+
+    // Upload da logo
+    logoImg.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!editing) return; // <-- Adicionado: Interrompe se não estiver em modo de edição
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*";
+        input.onchange = (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    logoImg.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+        input.click();
+    });
+
+    // TOAST //
+    function showToast(message) {
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => toast.classList.add("show"), 100);
+
+        setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+
 });
