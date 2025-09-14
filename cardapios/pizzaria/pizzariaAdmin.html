@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
 
-    <script defer src="/scripts/main.js"> </script>
-
     <title>SeuCadápio/Pizzaria</title>
 
 </head>
@@ -25,19 +23,15 @@
     <header>
         <nav class="navbar flex between wrapper">
             <div class="header-left flex gap-2">
-                <!-- Botão Menu -->
                 <button class="icon-btn">
                     <i class="fa-solid fa-bars"></i>
                 </button>
 
-                <!-- Logo -->
                 <a href="#" class="logo">SeuCardápio.</a>
             </div>
 
-            <!-- Centro limpo -->
             <div class="header-center"></div>
 
-            <!-- Ícones lado direito -->
             <div class="header-right flex gap-3">
                 <button class="icon-btn">
                     <i class="fa-solid fa-eye-slash"></i>
@@ -60,7 +54,8 @@
         </nav>
     </header>
 
-    <!-- Barra de Edição Lateral -->
+
+    <!-- Barra Lateral -->
     <aside class="left-sidebar" role="navigation" aria-label="Barra lateral de ações">
 
         <button class="side-btn" title="Aparência" aria-label="Aparência">
@@ -85,21 +80,26 @@
             <section>
                 <div id="banner" class="banner">
                     <div id="bannerBackground" class="w-full h-[420px] bg-home bg-cover bg-center relative">
-                        <div class="w-full h-full flex flex-col justify-center items-center bg-black bg-opacity-50">
-                            <img id="logoImg" src="../../imagens/Logo.jpeg" alt="Logo da Pizza"
-                                class="w-32 h-32 rounded-full shadow-lg hover:scale-110 duration-200" />
-
+                        <div class="w-full h-full flex flex-col justify-center items-center">
+                            <div id="logoContainer"
+                                class="w-32 h-32 flex items-center justify-center rounded-full shadow-lg bg-white">
+                                <img id="logoImg" src="../../imagens/Logo.jpeg" alt="Logo da Pizza"
+                                    class="w-full h-full rounded-full object-cover hover:scale-110 duration-200" />
+                            </div>
                             <p id="restaurantName" class="name-restaurant">
                                 Pizzaria Recanto
                             </p>
 
-                            <span id="address" class="endereco-restaurant">Rua dev 12, Sao Paulo - SP</span>
+                            <span id="restaurant-address" class="endereco-restaurant">
+                                Rua dev 12, Sao Paulo - SP
+                            </span>
 
                             <div class="bg-green-600 px-4 py-1 rounded-lg mt-5" id="date-span">
                                 <span class="text-white font-medium">Seg á Dom - 18:00 as 23:00</span>
                             </div>
                         </div>
 
+                        <!-- Botões no modo edição -->
                         <div id="editModeButtons" class="actions edit-mode-buttons hidden">
                             <button id="salvarBtn" class="btn salvar">Salvar</button>
                             <button id="cancelarBtn" class="btn cancelar">Cancelar</button>
@@ -108,18 +108,30 @@
                             </button>
                         </div>
 
-                        <!-- Mini barra de opções -->
+                        <!-- Menu de opções -->
                         <div id="optionsMenu" class="options-menu hidden">
-                            <button id="trocarLogoBtn" class="btn">Trocar logo</button>
-                            <button id="trocarFundoBtn" class="btn">Trocar fundo</button>
+
+                            <div class="option-row">
+                                <button id="trocarLogoBtn" class="btn">Trocar logo</button>
+                                <button id="removerLogoBtn" class="btn btn-remove">Remover</button>
+                            </div>
+
+                            <div class="option-row">
+                                <button id="trocarFundoBtn" class="btn">Trocar fundo</button>
+                                <button id="removerFundoBtn" class="btn btn-remove">Remover</button>
+                            </div>
+
+                            <!-- Slider de opacidade -->
                             <label class="slider-label">Opacidade de fundo
                                 <input type="range" id="opacityRange" min="0" max="100" value="50">
                             </label>
+
                             <button id="corFundoBtn" class="btn">Cor de fundo</button>
                             <button id="limparMenuBtn" class="btn">Limpar</button>
+
                         </div>
 
-
+                        <!-- Botões padrão -->
                         <div id="defaultButtons" class="actions">
                             <button id="editarBtn" class="btn editar">Editar</button>
                             <button id="removerBtn" class="btn remover">Remover</button>
@@ -138,12 +150,9 @@
                 <div class="menu wrapper p-top-min" id="menu">
                     <div id="produtos"
                         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16">
-                        <!-- Os produtos são carregados -->
                     </div>
                 </div>
             </section>
-            <!--FIM DO MENU-->
-
 
             <!--  BEBIDAS  -->
             <section>
@@ -154,7 +163,6 @@
                 <div class="bebidas wrapper p-top-min">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16"
                         id="bebidas">
-                        <!-- bebidas vão ser carregadas pelo JS -->
                     </div>
                 </div>
             </section>
@@ -168,21 +176,17 @@
                         <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
                             <h2 class="text-center font-bold text-2xl mb-2">Meu carrinho</h2>
 
-                            <!-- Itens do carrinho -->
                             <div id="cart-items" class="mb-4"></div>
 
-                            <!-- Total -->
                             <p class="texto font-bold">Total: <span id="cart-total">0.00</span></p>
 
-                            <!-- Endereço -->
-                            <p class="texto font-bold mt-4">endereco de entrega:</p>
-                            <input type="text" placeholder="Digite seu endereco completo..." id="address"
+                            <p class="texto font-bold mt-4">Endereço de entrega:</p>
+                            <input type="text" placeholder="Digite seu endereço completo..." id="address-input"
                                 class="w-full border-2 p-1 rounded my-1" />
 
                             <p class="text-red-500 hidden" id="address-warn">Digite seu endereco completo!</p>
                             <p class="text-red-500 hidden" id="address-warn-cart-empty">Adicione itens para finalizar
-                                sua
-                                compra!</p>
+                                sua compra!</p>
 
                             <div class="flex items-center justify-between mt-5 w-full">
                                 <button id="close-modal-btn"
@@ -195,10 +199,9 @@
                 </div>
             </section>
 
-
             <!--CART-->
             <section>
-                <div class="cart sticky wrapper bottom-0">
+                <div class="cart sticky wrapper bottom-0 p-top">
                     <div class="bg-red-500 py-3 flex items-center justify-center rounded-lg px-6">
                         <button class="flex items-center gap-2 text-white font-bold" id="cart-btn">
                             (<span id="cart-count">0</span>)
