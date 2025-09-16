@@ -33,7 +33,7 @@
             <div class="header-center"></div>
 
             <div class="header-right flex gap-3">
-                <button class="icon-btn">
+                <button id="btnVisualizar" class="icon-btn">
                     <i class="fa-solid fa-eye-slash"></i>
                     <span class="text-header">Visualizar</span>
                 </button>
@@ -80,7 +80,7 @@
             <section>
                 <div id="banner" class="banner">
                     <div id="bannerBackground" class="w-full h-[420px] bg-home bg-cover bg-center relative">
-                        <div class="w-full h-full flex flex-col justify-center items-center">
+                        <div class="w-full h-full flex flex-col justify-center">
                             <div id="logoContainer"
                                 class="w-32 h-32 flex items-center justify-center rounded-full shadow-lg bg-white">
                                 <img id="logoImg" src="../../imagens/Logo.jpeg" alt="Logo da Pizza"
@@ -94,8 +94,8 @@
                                 Rua dev 12, Sao Paulo - SP
                             </span>
 
-                            <div class="bg-green-600 px-4 py-1 rounded-lg mt-5" id="date-span">
-                                <span class="text-white font-medium">Seg á Dom - 18:00 as 23:00</span>
+                            <div class="horarioBg">
+                                <button id="horarioBtn" class="btn">Seg á Dom - 18:00 as 23:00</button>
                             </div>
                         </div>
 
@@ -122,11 +122,56 @@
                             </div>
 
                             <!-- Slider de opacidade -->
-                            <label class="slider-label">Opacidade de fundo
+                            <label class="slider-label text-center">Opacidade de fundo
                                 <input type="range" id="opacityRange" min="0" max="100" value="50">
                             </label>
 
-                            <button id="corFundoBtn" class="btn">Cor de fundo</button>
+                            <!-- Barra de personalização  -->
+                            <div class="font-toolbar">
+                                <select id="fontFamily" class="font-select">
+                                    <option value="Open Sans">Open Sans</option>
+                                    <option value="Roboto Condensed">Roboto Condensed</option>
+                                    <option value="Arial">Arial</option>
+                                    <option value="Times New Roman">Times New Roman</option>
+                                </select>
+                                <div class="font-size-control">
+                                    <input type="number" id="fontSize" value="28" min="8" max="72">
+                                </div>
+
+                            </div>
+
+                            <!-- Paleta de Cores -->
+                            <div id="colorPickerPanel" class="color-picker hidden text-center">
+                                <div class="slider-label text-center">
+                                    Cor do texto 
+                                </div>
+                                
+                                <i class="bi bi-palette"> <input type="color" id="colorInput" value="#000000"></i> 
+
+                                <div class="preset-colors">
+                                    <div class="color-swatch" data-color="#000000" style="background:#000000"></div>
+                                    <div class="color-swatch" data-color="#ffffff" style="background:#ffffff"></div>
+                                    <div class="color-swatch" data-color="#ff0000" style="background:#ff0000"></div>
+                                    <div class="color-swatch" data-color="#0070f3" style="background:#0070f3"></div>
+                                    <div class="color-swatch" data-color="#00c853" style="background:#00c853"></div>
+                                    <div class="color-swatch" data-color="#ff9100" style="background:#ff9100"></div>
+                                    <!-- adicione mais cores -->
+                                </div>
+                            </div>
+
+                            <div class="option-row">
+                                <div> <button id="textColorBtn" class="btn"><i class="fa-solid fa-font"></i></button>
+                                </div>
+                                <div> <button id="boldBtn" class="btn"><b><i class="fa-solid fa-bold"></i></b></button>
+                                </div>
+                                <div> <button id="italicBtn" class="btn"><i><i
+                                                class="fa-solid fa-italic"></i></i></button></div>
+                                <div> <button id="alignBtn" class="btn"><i
+                                            class="fa-solid fa-align-center"></i></button> </div>
+                                <div><button id="underlineBtn" class="btn"> <i class="fa-solid fa-underline"></i>
+                                    </button> </div>
+                            </div>
+
                             <button id="limparMenuBtn" class="btn">Limpar</button>
 
                         </div>

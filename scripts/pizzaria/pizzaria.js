@@ -572,6 +572,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
+
+
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////          BANNER          ///////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
@@ -592,12 +594,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const trocarLogoBtn = document.getElementById("trocarLogoBtn");
     const trocarFundoBtn = document.getElementById("trocarFundoBtn");
     const opacityRange = document.getElementById("opacityRange");
-    const corFundoBtn = document.getElementById("corFundoBtn");
     const limparMenuBtn = document.getElementById("limparMenuBtn");
 
     const removerLogoBtn = document.getElementById("removerLogoBtn");
     const logoContainer = document.getElementById("logoContainer");
     const removerFundoBtn = document.getElementById("removerFundoBtn");
+
+    const fontFamilySelect = document.getElementById("fontFamily");
+    const fontSizeInput = document.getElementById("fontSize");
+    const textColorBtn = document.getElementById("textColorBtn");
+    const boldBtn = document.getElementById("boldBtn");
+    const italicBtn = document.getElementById("italicBtn");
+    const alignBtn = document.getElementById("alignBtn");
+    const underlineBtn = document.getElementById("underlineBtn");
+    const horarioBtn = document.getElementById("horarioBtn");
+
+    const colorPickerPanel = document.getElementById("colorPickerPanel");
+    const colorInput = document.getElementById("colorInput");
+    const colorSwatches = document.querySelectorAll(".color-swatch");
 
 
 
@@ -606,7 +620,12 @@ document.addEventListener("DOMContentLoaded", () => {
         address: bannerAddress.textContent.trim(),
         backgroundImg: window.getComputedStyle(bannerBackground).backgroundImage,
         logoSrc: logoImg.src,
+        nameStyles: {},
+        addressStyles: {},
+        horarioStyles: {}
     };
+
+    let backupData = {}; // <- armazena os dados antes da edição
 
     // Guarda o estado atual do fundo necessario para opacidade
     let currentBackgroundImage = window.getComputedStyle(bannerBackground).backgroundImage;
@@ -614,6 +633,84 @@ document.addEventListener("DOMContentLoaded", () => {
     let editing = false;
     let logoVisivel = true;
     let fundoVisivel = true;
+    let focusedInput = null;
+    let colorPickerOpen = false; // controla estado do painel de cor
+    let currentAlign = "center"; //Alinhamento
+    let backupOpacity = null; // guarda opacidade original
+    let currentOpacity = 50; // padrão inicial
+
+
+    //---------Função reutilizaveis --------//
+    function criarLogoPlaceholder() {
+        logoContainer.style.display = "flex";
+        logoContainer.innerHTML = `
+        <div id="logoPlaceholder" 
+            class="w-32 h-32 flex flex-col items-center justify-center 
+            rounded-full shadow-lg cursor-pointer">
+            <i class="bi bi-plus-square-dotted"></i>
+            <span>Adicionar logo</span>
+        </div>
+    `;
+
+        // Torna o placeholder clicável para upload
+        const placeholder = document.getElementById("logoPlaceholder");
+        placeholder.addEventListener("click", () => {
+            if (!editing) return;
+            const input = document.createElement("input");
+            input.type = "file";
+            input.accept = "image/*";
+            input.onchange = (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        logoContainer.innerHTML = `
+                        <img id="logoImg" src="${e.target.result}" 
+                             alt="Logo" 
+                             class="w-32 h-32 object-cover rounded-full cursor-pointer editing-border">
+                    `;
+
+                        // reativa clique para trocar
+                        const logoImg = document.getElementById("logoImg");
+                        logoImg.addEventListener("click", () => {
+                            if (!editing) return;
+                            const input = document.createElement("input");
+                            input.type = "file";
+                            input.accept = "image/*";
+                            input.onchange = (event) => {
+                                const file = event.target.files[0];
+                                if (file) {
+                                    const reader = new FileReader();
+                                    reader.onload = (e) => {
+                                        logoImg.src = e.target.result;
+                                    };
+                                    reader.readAsDataURL(file);
+                                }
+                            };
+                            input.click();
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            input.click();
+        });
+    }
+
+    // TOAST //
+    function showToast(message) {
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => toast.classList.add("show"), 100);
+
+        setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
 
     //  Modo de edição
     function renderEditMode() {
@@ -625,6 +722,20 @@ document.addEventListener("DOMContentLoaded", () => {
             // Transforma texto em inputs
             restaurantName.innerHTML = `<input type="text" class="editable-input" value="${restaurantName.textContent.trim()}">`;
             bannerAddress.innerHTML = `<input type="text" class="editable-input" value="${bannerAddress.textContent.trim()}">`;
+
+            // Aplica estilos salvos nos inputs (se existirem)
+            const nameInput = restaurantName.querySelector("input");
+            const addressInput = bannerAddress.querySelector("input");
+
+            if (originalData.nameStyles) {
+                Object.assign(nameInput.style, originalData.nameStyles);
+            }
+            if (originalData.addressStyles) {
+                Object.assign(addressInput.style, originalData.addressStyles);
+            }
+            if (originalData.horarioStyles) {
+                Object.assign(horarioBtn.style, originalData.horarioStyles);
+            }
 
             // Adiciona classe de cursor para indicar que a imagem é clicável
             bannerBackground.classList.add("cursor-pointer");
@@ -651,6 +762,14 @@ document.addEventListener("DOMContentLoaded", () => {
             restaurantName.innerHTML = originalData.name;
             bannerAddress.innerHTML = originalData.address;
 
+            // Aplica estilos salvos (fora do modo edição)
+            if (originalData.nameStyles) {
+                Object.assign(restaurantName.style, originalData.nameStyles);
+            }
+            if (originalData.addressStyles) {
+                Object.assign(bannerAddress.style, originalData.addressStyles);
+            }
+
             bannerBackground.classList.remove("cursor-pointer", "editing-border-fundo");
 
             // remove borda tanto da logo quanto do placeholder
@@ -661,11 +780,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- EVENT LISTENERS ---
+    // ----------------------------------- EVENT LISTENERS ---------------------------------------------//
 
     // Abrir/fechar menu de opções + troca de ícone
     opcoesBtn.addEventListener("click", (e) => {
         e.stopPropagation();
+        if (!editing) return;
         optionsMenu.classList.toggle("hidden");
 
         const icon = opcoesBtn.querySelector("i");
@@ -719,22 +839,12 @@ document.addEventListener("DOMContentLoaded", () => {
             removerLogoBtn.textContent = "Adicionar logo";
             logoVisivel = false;
 
-            // Permite clicar no placeholder para trocar logo
-            document.getElementById("logoPlaceholder").addEventListener("click", () => {
-                trocarLogoBtn.click();
-            });
+
 
         } else {
+            criarLogoPlaceholder();
             // Volta a div com placeholder
             logoContainer.style.display = "flex";
-            logoContainer.innerHTML = `
-            <div id="logoPlaceholder" 
-                class="w-32 h-32 flex flex-col items-center justify-center 
-                rounded-full text-gray-500 shadow-lg cursor-pointer editing-border">
-                    <i class="bi bi-plus-square-dotted text-4xl"></i>
-                    <span class="text-sm mt-1">Adicionar logo</span>
-            </div>
-        `;
 
             // Mostra o botão "Trocar logo" novamente
             trocarLogoBtn.style.display = "inline-block";
@@ -742,54 +852,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // Atualiza texto do botão
             removerLogoBtn.textContent = "Remover";
             logoVisivel = true;
-
-            // Reativa clique na logo para upload
-            // Adiciona evento de clique para upload no placeholder
-            const placeholder = document.getElementById("logoPlaceholder");
-            placeholder.addEventListener("click", () => {
-                if (!editing) return;
-                const input = document.createElement("input");
-                input.type = "file";
-                input.accept = "image/*";
-                input.onchange = (event) => {
-                    const file = event.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                            logoContainer.innerHTML = `
-                    <img id="logoImg" src="${e.target.result}" 
-                         alt="Logo" 
-                         class="w-32 h-32 object-cover rounded-full cursor-pointer editing-border">
-                `;
-
-                            // reativa clique na nova logo para trocar
-                            const logoImg = document.getElementById("logoImg");
-                            logoImg.addEventListener("click", () => {
-                                if (!editing) return;
-                                const input = document.createElement("input");
-                                input.type = "file";
-                                input.accept = "image/*";
-                                input.onchange = (event) => {
-                                    const file = event.target.files[0];
-                                    if (file) {
-                                        const reader = new FileReader();
-                                        reader.onload = (e) => {
-                                            logoImg.src = e.target.result;
-                                        };
-                                        reader.readAsDataURL(file);
-                                    }
-                                };
-                                input.click();
-                            });
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                };
-                input.click();
-            });
         }
     });
-    
+
 
     // Trocar fundo
     trocarFundoBtn.addEventListener("click", () => {
@@ -849,17 +914,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Opacidade de fundo
     function updateBackgroundOpacity(value) {
-        // Se não houver imagem no fundo
         if (!currentBackgroundImage || currentBackgroundImage === "none") {
             opacityRange.value = 0;
             showToast("Opacidade indisponível");
             return;
         }
 
-        // valor vai de 0 (sem overlay) até 0.8 (80%)
         const opacity = (value / 100) * 0.8;
+        currentOpacity = value;
 
-        // Aplica gradiente + imagem atual
         bannerBackground.style.backgroundImage = `
         linear-gradient(rgba(0,0,0,${opacity}), rgba(0,0,0,${opacity})),
         ${currentBackgroundImage}
@@ -873,43 +936,280 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Valor inicial (50%)
     window.addEventListener("load", () => {
-        opacityRange.value = 50;
-        updateBackgroundOpacity(50);
+        const startOpacity = originalData.opacity || 50;
+        currentBackgroundImage = originalData.backgroundImg; // pega a imagem original limpa
+        opacityRange.value = startOpacity;
+        updateBackgroundOpacity(startOpacity);
     });
 
-    // Cor de fundo
-    corFundoBtn.addEventListener("click", () => {
+    // Upload da logo
+    logoImg.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!editing) return; // <-- Adicionado: Interrompe se não estiver em modo de edição
         const input = document.createElement("input");
-        input.type = "color";
+        input.type = "file";
+        input.accept = "image/*";
         input.onchange = (event) => {
-            bannerBackground.style.backgroundColor = event.target.value;
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    logoImg.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
         };
         input.click();
     });
 
-    // Limpar (menu)
-    limparMenuBtn.addEventListener("click", () => {
-        bannerBackground.style.backgroundImage = "none";
-        logoImg.src = "";
+    //---------------------------------------  PERSONALIZAÇÃO DE TEXTO  ------------------------------------------------//
+    function getTextTargets() {
+        // Se houver um input focado → aplica só nele
+        if (focusedInput) {
+            return [focusedInput];
+        }
+
+        // Função auxiliar: se o elemento contém um input (modo edição), retorna o input,
+        // senão retorna o próprio elemento
+        function resolved(el) {
+            if (!el) return null;
+            const input = el.querySelector && el.querySelector("input.editable-input");
+            return input || el;
+        }
+
+        const nameEl = resolved(document.getElementById("restaurantName"));
+        const addrEl = resolved(document.getElementById("restaurant-address"));
+        const horaEl = resolved(document.getElementById("horarioBtn"));
+
+        // Filtra nulos e retorna array
+        return [nameEl, addrEl, horaEl].filter(Boolean);
+    }
+
+    // ------- Atualize o listener global de clique (restaura focusedInput) ------------
+    document.addEventListener("click", (e) => {
+        // Verifica se o clique foi fora dos inputs editáveis, da barra de ferramentas e do painel de cores
+        const isClickOutside = !e.target.classList.contains("editable-input") &&
+            !e.target.closest(".font-toolbar") &&
+            !e.target.closest("#colorPickerPanel");
+
+        // Se o clique foi fora de todos esses elementos
+        if (isClickOutside) {
+            // Reseta para o modo global (sem foco em um input específico)
+            focusedInput = null;
+            // Oculta o painel de cores
+            colorPickerPanel.classList.add("hidden");
+            textColorBtn.classList.remove("active");
+            colorPickerOpen = false;
+
+            // Restaura os valores "padrão globais" visuais do toolbar
+            fontFamilySelect.value = "Open Sans";
+            fontSizeInput.value = 28;
+        }
     });
 
+
+    // Detecta foco nos inputs criados em modo edição
+    document.addEventListener("focusin", (e) => {
+        if (e.target.classList.contains("editable-input")) {
+            focusedInput = e.target;
+
+            // Pega o estilo computado real
+            const computed = window.getComputedStyle(focusedInput);
+
+            fontFamilySelect.value = computed.fontFamily.replace(/["']/g, "") || "Open Sans";
+            fontSizeInput.value = parseInt(computed.fontSize) || 20;
+        }
+    });
+
+    // Detecta clique fora dos inputs → volta para o modo global
+    document.addEventListener("click", (e) => {
+        if (!e.target.classList.contains("editable-input") &&
+            !e.target.closest(".font-toolbar")) {
+            // focusedInput = null; // reseta para global
+
+            // Reset: mostra valores "padrão globais"
+            fontFamilySelect.value = "Open Sans";
+            fontSizeInput.value = 20;
+        }
+    });
+
+    // Atualiza a fonte
+    fontFamilySelect.addEventListener("change", () => {
+        if (focusedInput) {
+            // muda só o input ativo
+            focusedInput.style.fontFamily = fontFamilySelect.value;
+        } else {
+            // muda todos os textos
+            getTextTargets().forEach(el => el.style.fontFamily = fontFamilySelect.value);
+        }
+    });
+
+    // Atualiza o tamanho
+    fontSizeInput.addEventListener("input", () => {
+        const size = fontSizeInput.value + "px";
+        if (focusedInput) {
+            focusedInput.style.fontSize = size;
+        } else {
+            getTextTargets().forEach(el => el.style.fontSize = size);
+        }
+    });
+
+    // Alterar cor do texto //
+    textColorBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        colorPickerOpen = !colorPickerOpen;
+
+        if (colorPickerOpen) {
+            colorPickerPanel.classList.remove("hidden");
+            textColorBtn.classList.add("active");
+        } else {
+            colorPickerPanel.classList.add("hidden");
+            textColorBtn.classList.remove("active");
+        }
+    });
+
+    // aplicar cor via input
+    colorInput.addEventListener("input", (e) => {
+        const color = e.target.value;
+        getTextTargets().forEach(el => el.style.color = color);
+
+    });
+
+    // aplicar cor via clique em swatch
+    colorSwatches.forEach(swatch => {
+        swatch.addEventListener("click", () => {
+            const color = swatch.dataset.color;
+            colorInput.value = color; // sincroniza
+            getTextTargets().forEach(el => el.style.color = color);
+        });
+    });
+
+
+
+    //----------  Tipos de texto  ----------//
+    // Negrito
+    boldBtn.addEventListener("click", () => {
+        const isActive = boldBtn.classList.contains("active");
+        getTextTargets().forEach(el => {
+            el.style.fontWeight = isActive ? "normal" : "bold";
+        });
+        // apenas um toggle simples
+        boldBtn.classList.toggle("active");
+    });
+
+    // Itálico
+    italicBtn.addEventListener("click", () => {
+        const isActive = italicBtn.classList.contains("active");
+        getTextTargets().forEach(el => {
+            el.style.fontStyle = isActive ? "normal" : "italic";
+        });
+        italicBtn.classList.toggle("active");
+    });
+
+    // Sublinhado
+    underlineBtn.addEventListener("click", () => {
+        const isActive = underlineBtn.classList.contains("active");
+        getTextTargets().forEach(el => {
+            el.style.textDecoration = isActive ? "none" : "underline";
+        });
+        underlineBtn.classList.toggle("active");
+    });
+
+    // Alinhamento
+    alignBtn.addEventListener("click", () => {
+        // Alterna o estado
+        if (currentAlign === "center") {
+            currentAlign = "left";
+        } else if (currentAlign === "left") {
+            currentAlign = "right";
+        } else {
+            currentAlign = "center";
+        }
+
+        // Aplica alinhamento ao(s) texto(s)
+        getTextTargets().forEach(el => {
+            el.style.textAlign = currentAlign;
+            // Se for um input, também salva no container pai
+            if (el.tagName === "INPUT" && el.parentElement) {
+                el.parentElement.style.textAlign = currentAlign;
+            }
+        });
+
+        // Troca o ícone conforme o estado atual
+        const icon = alignBtn.querySelector("i");
+        if (currentAlign === "center") {
+            icon.className = "fa-solid fa-align-center";
+        } else if (currentAlign === "left") {
+            icon.className = "fa-solid fa-align-left";
+        } else {
+            icon.className = "fa-solid fa-align-right";
+        }
+    });
+
+
+    //----------  Botões padrão  ----------//
+    // Limpar (menu)
+    limparMenuBtn.addEventListener("click", () => {
+        // Fundo
+        bannerBackground.style.backgroundImage = "none";
+        currentBackgroundImage = "none";
+        opacityRange.value = 50;
+        updateBackgroundOpacity(50);
+
+
+        criarLogoPlaceholder();
+
+
+        // Nome → input visível com texto preto e borda preta
+        restaurantName.innerHTML = `
+        <input type="text" 
+               value="" 
+               placeholder="Adicionar nome" 
+               class="w-full bg-transparent border-b border-black text-center text-black focus:outline-none" />
+    `;
+
+        // Endereço → input visível com texto preto e borda preta
+        bannerAddress.innerHTML = `
+        <input type="text" 
+               value="" 
+               placeholder="Adicionar endereço" 
+               class="w-full bg-transparent border-b border-black text-center text-black focus:outline-none" />
+    `;
+
+        // Atualiza originalData
+        originalData.name = "";
+        originalData.address = "";
+        originalData.backgroundImg = "none";
+        originalData.logoSrc = "";
+        originalData.opacity = 50;
+
+        showToast("Banner limpo. Preencha novamente os dados.");
+    });
 
     // "Editar"
     editarBtn.addEventListener("click", (e) => {
         e.stopPropagation(); // <-- impede que o clique vá parar em outro elemento
         editing = true;
-        originalData = {
-            name: restaurantName.textContent.trim(),
-            address: bannerAddress.textContent.trim(),
-            backgroundImg: window.getComputedStyle(bannerBackground).backgroundImage,
-            logoSrc: logoImg.src,
-        };
+        focusedInput = null;
+
+        // cria um backup ANTES da edição
+        backupData = JSON.parse(JSON.stringify(originalData));
+
+        // guarda também a opacidade atual do slider
+        backupData.backgroundImg = currentBackgroundImage;
+        backupOpacity = currentOpacity;
+
         renderEditMode();
     });
 
     // "Salvar"
     salvarBtn.addEventListener("click", (e) => {
         e.stopPropagation();
+
+        const nameInput = restaurantName.querySelector("input");
+        const addressInput = bannerAddress.querySelector("input");
+
         const newName = restaurantName.querySelector("input").value;
         const newAddress = bannerAddress.querySelector("input").value;
 
@@ -935,74 +1235,126 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // Salva também os estilos aplicados nos inputs
+        originalData.nameStyles = {
+            fontFamily: nameInput.style.fontFamily,
+            fontSize: nameInput.style.fontSize,
+            color: nameInput.style.color,
+            fontWeight: nameInput.style.fontWeight,
+            fontStyle: nameInput.style.fontStyle,
+            textDecoration: nameInput.style.textDecoration,
+            textAlign: nameInput.style.textAlign || restaurantName.style.textAlign
+        };
+
+        originalData.addressStyles = {
+            fontFamily: addressInput.style.fontFamily,
+            fontSize: addressInput.style.fontSize,
+            color: addressInput.style.color,
+            fontWeight: addressInput.style.fontWeight,
+            fontStyle: addressInput.style.fontStyle,
+            textDecoration: addressInput.style.textDecoration,
+            textAlign: addressInput.style.textAlign || bannerAddress.style.textAlign
+        };
+
+
+        originalData.horarioStyles = {
+            fontFamily: horarioBtn.style.fontFamily,
+            fontSize: horarioBtn.style.fontSize,
+            color: horarioBtn.style.color,
+            fontWeight: horarioBtn.style.fontWeight,
+            fontStyle: horarioBtn.style.fontStyle,
+            textDecoration: horarioBtn.style.textDecoration,
+            textAlign: horarioBtn.style.textAlign
+        };
+
+
         // Atualiza os dados originais
         originalData.name = newName;
         originalData.address = newAddress;
+        originalData.backgroundImg = currentBackgroundImage;
+        originalData.logoSrc = logoImg.src;
+        originalData.opacity = currentOpacity;
 
         // Finaliza o modo de edição
         editing = false;
+        focusedInput = null;
         renderEditMode();
-        showToast("Dados do banner salvos com sucesso!");
+
+        // Garante que o menu fecha ao salvar
+        optionsMenu.classList.add("hidden");
+        opcoesBtn.querySelector("i").className = "fa-solid fa-angle-down";
+
+        showToast("Salvo com sucesso!");
     });
 
     //"Cancelar"
     cancelarBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        // Reverte para os dados originais do backup
-        restaurantName.innerHTML = originalData.name;
-        bannerAddress.innerHTML = originalData.address;
+        // restaura dados do backup
+        restaurantName.innerHTML = backupData.name;
+        bannerAddress.innerHTML = backupData.address;
+        bannerBackground.style.backgroundImage = backupData.backgroundImg;
+        logoImg.src = backupData.logoSrc;
 
-        // Reverte as imagens
-        bannerBackground.style.backgroundImage = originalData.backgroundImg;
-        logoImg.src = originalData.logoSrc;
 
         // Atualiza currentBackgroundImage para manter a consistência
-        currentBackgroundImage = originalData.backgroundImg;
+        currentBackgroundImage = backupData.backgroundImg;
+
+        // restaura a opacidade original
+        opacityRange.value = backupOpacity;
+        updateBackgroundOpacity(backupOpacity);
 
         // Finaliza o modo de edição
         editing = false;
+        focusedInput = null;
         renderEditMode();
+
+        // Garante que o menu fecha ao cancelar
+        optionsMenu.classList.add("hidden");
+        opcoesBtn.querySelector("i").className = "fa-solid fa-angle-down";
+
         showToast("Edição cancelada.");
     });
 
-
-
-
-    // Upload da logo
-    logoImg.addEventListener("click", (e) => {
+    // "Horario de funcionamento"
+    horarioBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        if (!editing) return; // <-- Adicionado: Interrompe se não estiver em modo de edição
-        const input = document.createElement("input");
-        input.type = "file";
-        input.accept = "image/*";
-        input.onchange = (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    logoImg.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        };
-        input.click();
+        if (!editing) return;
+
+        focusedInput = horarioBtn;
+
+        // Lê estilos reais
+        const computed = window.getComputedStyle(horarioBtn);
+        fontFamilySelect.value = computed.fontFamily.replace(/["']/g, "") || "Open Sans";
+        fontSizeInput.value = parseInt(computed.fontSize) || 20;
+    })
+
+
+
+
+    // ---------------------- MODO VISUALIZAR ---------------------- //
+    let viewMode = false;
+    const btnVisualizar = document.getElementById("btnVisualizar");
+
+    btnVisualizar.addEventListener("click", () => {
+        viewMode = !viewMode;
+
+        document.body.classList.toggle("view-mode", viewMode);
+
+        // Troca ícone
+        const icon = btnVisualizar.querySelector("i");
+        if (viewMode) {
+            icon.className = "fa-solid fa-eye"; // Olho aberto
+            showToast("Modo Visualização");
+        } else {
+            icon.className = "fa-solid fa-eye-slash"; // Olho cortado
+            showToast("Modo Edição");
+        }
     });
 
-    // TOAST //
-    function showToast(message) {
-        const toast = document.createElement("div");
-        toast.className = "toast";
-        toast.textContent = message;
-        document.body.appendChild(toast);
 
-        setTimeout(() => toast.classList.add("show"), 100);
 
-        setTimeout(() => {
-            toast.classList.remove("show");
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
-    }
+
 
 
 });
-
