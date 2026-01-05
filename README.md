@@ -1,0 +1,1 @@
+O projeto em questão encontrava-se em fase de desenvolvimento, mas teve sua continuidade interrompida devido a restrições de cronograma. Optou-se pelo encerramento das atividades, contudo, o material permanece disponível para consulta e fins de estudo.
